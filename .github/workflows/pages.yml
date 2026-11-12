@@ -27,7 +27,7 @@ jobs:
         run: |
           mkdir -p _site/src
           cp index.html manifest.webmanifest _site/
-          cp src/app.js src/brand.js src/engine.js _site/src/
+          cp src/app.js src/brand.js src/engine.js src/styles.css _site/src/
           touch _site/.nojekyll
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
