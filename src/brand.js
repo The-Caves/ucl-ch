@@ -1,0 +1,1 @@
+export const BRAND={appName:"Cornhole Hub",shortName:"CH",league:"United Cornhole League",accent:"#c3f56c",disclaimer:"Independent UCL-inspired concept. Not affiliated with UCL or Scoreholio."};
