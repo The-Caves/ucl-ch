@@ -1,0 +1,5 @@
+export const BAG_VALUES=[0,1,3];
+export function validateBags(bags){if(!Array.isArray(bags)||bags.length!==4||bags.some(x=>!BAG_VALUES.includes(x)))throw Error("A round requires four bags (0 off, 1 board, 3 hole)");return bags}
+export function addRound(existing,{matchId,playerId,bags}){validateBags(bags);if(!matchId||!Number.isInteger(Number(playerId)))throw Error("Match and player required");return [...existing,{matchId:String(matchId),playerId:Number(playerId),bags:[...bags],createdAt:new Date().toISOString()}]}
+export function summarizeRounds(rows){let points=0;const counts={off:0,board:0,hole:0};for(const row of rows)for(const b of validateBags(row.bags)){points+=b;counts[b===0?"off":b===1?"board":"hole"]++}const bags=rows.length*4;return {rounds:rows.length,bags,points,ppr:bags?Number((points*4/bags).toFixed(2)):null,counts,accuracy:bags?Number((100*(counts.board+counts.hole)/bags).toFixed(1)):null}}
+export function exportRoundsCSV(rows){const q=x=>'"'+String(x??"").replaceAll('"','""')+'"';return ["match_id,player_id,bag_1,bag_2,bag_3,bag_4,points",...rows.map(r=>[r.matchId,r.playerId,...r.bags,r.bags.reduce((a,b)=>a+b,0)].map(q).join(","))].join("\n")}
