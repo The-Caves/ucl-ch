@@ -7,7 +7,7 @@ rows.push(match("F",1,0,ref("W",k,0),ref("L",2*k-2,0)));
 rows.push(match("F",2,0,ref("F",1,0,"loser"),ref("F",1,0,"winner")));return rows}
 export function winner(m){return m.status==="Final"?(m.scoreA>m.scoreB?m.a:m.b):null}
 export function loser(m){return m.status==="Final"?(m.scoreA>m.scoreB?m.b:m.a):null}
-export function nextMatch(matches,id,outcome){return matches.find(m=>m.sourceA?.id===id&&m.sourceA.outcome===outcome||m.sourceB?.id===id&&m.sourceB.outcome===outcome)||null}
+export function nextMatch(matches,id,outcome){return matches.find(m=>m.status!=="Not needed"&&(m.sourceA?.id===id&&m.sourceA.outcome===outcome||m.sourceB?.id===id&&m.sourceB.outcome===outcome))||null}
 export function recordResult(matches,id,a,b){a=Number(a);b=Number(b);if(!Number.isInteger(a)||!Number.isInteger(b)||a<0||b<0||a===b)throw Error("Enter different nonnegative whole-number scores");const rows=matches.map(m=>({...m})),m=rows.find(x=>x.id===id);if(!m||!m.a||!m.b)throw Error("Both competitors must be assigned");if(m.status==="Final")throw Error("Result already final. Corrections require an audited director workflow.");if(m.side==="F"&&m.round===2){const first=rows.find(x=>x.eventId===m.eventId&&x.side==="F"&&x.round===1);if(!first||winner(first)!==first.b)throw Error("Reset final not required");}
 m.scoreA=a;m.scoreB=b;m.status="Final";for(const target of rows){for(const side of ["A","B"]){const src=target["source"+side];if(src?.id!==id)continue;target[side.toLowerCase()]=src.outcome==="winner"?winner(m):loser(m);}}
 if(m.side==="F"&&m.round===1){const reset=rows.find(x=>x.eventId===m.eventId&&x.side==="F"&&x.round===2);if(reset&&winner(m)===m.a){reset.status="Not needed";reset.a=null;reset.b=null;}}
