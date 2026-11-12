@@ -26,7 +26,9 @@ jobs:
       - name: Stage static site
         run: |
           mkdir -p _site/src
-          cp index.html manifest.webmanifest _site/\n          mkdir -p _site/public\n          cp public/ucl-mark.svg _site/public/
+          cp index.html manifest.webmanifest _site/
+          mkdir -p _site/public
+          cp public/ucl-mark.svg _site/public/
           cp src/app.js src/brand.js src/engine.js src/styles.css _site/src/
           touch _site/.nojekyll
       - uses: actions/configure-pages@v5
