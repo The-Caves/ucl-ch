@@ -3,37 +3,55 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+
 permissions:
   contents: read
   pages: write
   id-token: write
+  actions: write
+
 concurrency:
   group: github-pages
-  cancel-in-progress: true
+  cancel-in-progress: false
+
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Check out source
+        uses: actions/checkout@v4
+      - name: Set up Node
+        uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Test bracket and ratings
+      - name: Run tests
         run: npm test
-      - name: Stage static site
+      - name: Prepare website
+        shell: bash
         run: |
-          mkdir -p _site/src
+          set -euo pipefail
+          mkdir -p _site/src _site/public
           cp index.html manifest.webmanifest _site/
-          mkdir -p _site/public
           cp public/ucl-mark.svg _site/public/
           cp src/app.js src/brand.js src/engine.js src/styles.css _site/src/
           touch _site/.nojekyll
-      - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v3
+          test -s _site/index.html
+          test -s _site/src/app.js
+          find _site -maxdepth 3 -type f -print
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
         with:
           path: _site
-      - id: deployment
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy Pages
+        id: deployment
         uses: actions/deploy-pages@v4
