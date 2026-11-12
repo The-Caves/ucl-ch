@@ -16,3 +16,4 @@ All sample people, events and scores are fictional. This is a single-browser dem
 
 ## Branding
 Edit `src/brand.js` for naming and `index.html` theme variables for colors. Licensed artwork can replace placeholder assets after permission is obtained.
+\n## Throw scoring\nDirectors can enter four bags per round (0 off, 1 board, 3 hole), view recorded PPR and placement counts in match details, and export CSV. This is browser-local demo data, not synchronized across tablets.\n
