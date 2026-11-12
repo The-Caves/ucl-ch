@@ -1,0 +1,4 @@
+import test from "node:test";import assert from "node:assert/strict";import {roundPoints,scorecard,addScorecardRound} from "../src/scorecard.js";
+test("rejects invalid in/on counts",()=>{assert.throws(()=>roundPoints(3,2));assert.equal(roundPoints(2,0),6);assert.equal(roundPoints(1,3),6)});
+test("cancellation score and metrics",()=>{const rows=[{matchId:"m",a:1,b:2,aIn:2,aOn:0,bIn:1,bOn:1},{matchId:"m",a:1,b:2,aIn:1,aOn:3,bIn:0,bOn:0}];const s=scorecard(rows,1,2);assert.equal(s.scoreA,8);assert.equal(s.scoreB,0);assert.equal(s.statsA.ppr,6);assert.equal(s.statsA.fourBagPct,50);assert.equal(s.statsA.offPct,25);assert.equal(s.statsA.dpr,4);assert.equal(s.history[0].delta,2)});
+test("rounds cannot continue after 21",()=>{let r=[];for(let i=0;i<2;i++)r=addScorecardRound(r,{matchId:"m",a:1,b:2,aIn:4,aOn:0,bIn:0,bOn:0});assert.equal(scorecard(r,1,2).scoreA,24);assert.throws(()=>addScorecardRound(r,{matchId:"m",a:1,b:2,aIn:0,aOn:0,bIn:0,bOn:0}))});
