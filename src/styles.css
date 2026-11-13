@@ -204,3 +204,25 @@ body.in-tournament .leaderboardtable tbody tr:nth-child(even) td.playercell{back
 .practice-filter{display:block;max-width:330px;font-weight:700;color:#123450;margin:15px 0}
 .pagination{display:flex;justify-content:center;align-items:center;gap:14px;margin-top:18px}
 @media(max-width:650px){.dual-round-entry{gap:8px}.dual-round-entry>div{padding:7px}.dual-round-entry .scoreboard-numbers{gap:5px}.dual-round-entry h3{font-size:16px}.scoreboard-dialog-head h2{font-size:24px}.practice-metrics>div{padding:10px}}
+
+/* Practice and dashboard refinements */
+.mytournaments>h2,.center-title,.practice-dashboard>h1{text-align:center}
+.mytoggle{border:1px solid #b8102c;border-radius:12px;overflow:hidden}
+.mytoggle button.selected{background:#b8102c!important;color:#fff!important}
+.text-link{display:block;margin:18px auto 0;padding:5px 8px;border:0;background:transparent;color:#12629c;font-weight:800;text-decoration:underline;text-underline-offset:4px}
+.panel>.sectionhead:has(>h2:first-child){gap:12px}
+.panel>.sectionhead h2{flex:1}
+.panel:has(>.sectionhead>h2:first-child)>.sectionhead:has(.primary) h2{text-align:center}
+.practice-name[hidden],.practice-name .field[hidden]{display:none!important}
+.player-suggestions{display:grid;gap:3px;max-height:190px;overflow-y:auto}
+.player-suggestions button{border:1px solid #d8e2ec;background:#fff;color:#12304c;text-align:left;padding:10px;border-radius:7px;font-weight:700}
+.player-suggestions button:focus,.player-suggestions button:hover{background:#e7f0f8}
+.scoreboard-active .top,.scoreboard-active #nav,.scoreboard-active .footer{display:none!important}
+.scoreboard-active .wrap{padding-top:8px}
+.scoreboard-player-name{font-size:clamp(19px,3vw,30px)!important;font-weight:850;overflow-wrap:anywhere}
+.scoreboard-numbers button.picked{background:#b8102c!important;color:white!important;border-color:#b8102c!important}
+.round-history.selected{border:2px solid #b8102c!important;background:#fff0f2!important;color:#9e0e27!important}
+.scoreboard-rounds{scroll-padding-inline:35%}
+.round-detail-list{display:grid;gap:8px}
+.round-detail-row{display:flex;align-items:center;justify-content:space-between;gap:12px;border-bottom:1px solid #dce5ef;padding:12px 5px;color:#15324d}
+.round-detail-row small{color:#b8102c;font-weight:700}
