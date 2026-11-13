@@ -278,3 +278,24 @@ body:not(.in-tournament) .top .tabs button:hover:not(.active){background:#244767
 .demo-auth form{display:grid;gap:12px}
 .demo-signout{background:transparent;color:#e7f0fa;border:1px solid #6384a3;border-radius:7px;font-size:12px;padding:5px 9px;cursor:pointer;position:absolute;right:10px;top:4px}
 .top .tabs{position:relative}
+
+/* Doubles spectator layout: team color identifies sides; highlighted cards identify throwers. */
+.doubles-matchup{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:12px;align-items:start;margin-top:20px}
+.doubles-team{min-width:0;display:grid;gap:12px}
+.doubles-team h3{margin:0;text-align:center}
+.doubles-versus{align-self:center;font-weight:900;color:#637b91;font-size:18px}
+.doubles-team .doubles-player{min-width:0;border:3px solid;border-radius:14px;padding:12px}
+.doubles-player.team-a{border-color:#bf1639;background:#fff9fa}
+.doubles-player.team-b{border-color:#1768a5;background:#f7fbff}
+.doubles-player-heading{display:flex;flex-direction:column;gap:3px}
+.doubles-player-heading strong{font-size:17px;overflow-wrap:anywhere}
+.throwing-position{font-size:11px;color:#61758a}
+.round-all-players{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.round-player{display:flex;justify-content:space-between;gap:6px;align-items:center;border:2px solid #d7e1ea;border-radius:9px;padding:10px 8px;min-width:0;color:#667b8d}
+.round-player span{overflow-wrap:anywhere;font-size:12px}
+.round-player b{white-space:nowrap;font-size:13px}
+.round-player.is-throwing.team-a{border:3px solid #bf1639;color:#153552;background:#fff0f3}
+.round-player.is-throwing.team-b{border:3px solid #1768a5;color:#153552;background:#edf6ff}
+.round-player:not(.is-throwing){opacity:.58}
+.round-thrower.team-a{border-color:#bf1639}.round-thrower.team-b{border-color:#1768a5}
+@media(max-width:650px){.doubles-matchup{grid-template-columns:minmax(0,1fr);gap:10px}.doubles-versus{padding:3px;text-align:center}.doubles-team{gap:9px}.doubles-team .doubles-player{padding:11px}.round-all-players{gap:6px}.round-player{padding:8px 6px;flex-direction:column;align-items:flex-start}.round-player b{font-size:12px}}
