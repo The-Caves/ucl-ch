@@ -170,3 +170,37 @@ body.in-tournament .leaderboardtable tbody tr:nth-child(even) td.playercell{back
 .scoreboard-save:disabled{opacity:.45;cursor:not-allowed}
 @media(max-width:650px){.scoreboard-shell{gap:5px}.scoreboard-players{min-height:0;flex:1}.scoreboard-player{min-height:0;flex-direction:row}.scoreboard-total{font-size:clamp(54px,15vw,90px)}.scoreboard-foot{max-width:70px}.scoreboard-dialog{padding:14px}.dual-round-entry{gap:8px}.dual-round-entry .scoreboard-numbers button{min-height:42px;font-size:18px}.practice-session{grid-template-columns:1fr auto}.practice-session span:last-child{grid-column:1/-1}}
 @media(max-width:390px){.dual-round-entry{grid-template-columns:1fr;max-height:65dvh;overflow-y:auto}.dual-round-entry .scoreboard-numbers{grid-template-columns:repeat(7,minmax(0,1fr))}.dual-round-entry .scoreboard-numbers button{min-height:37px;font-size:15px}}
+
+
+/* Practice UI contrast, round entry, and statistics */
+.practice-name,.practice-name>label,.practice-name .guest-choice,.firstbag,.firstbag label{color:#123450!important}
+.practice-name .guest-choice{font-weight:650}
+.practice-name .player-search{color:#123450;background:#fff}
+.practice-home-cta{text-align:center}
+.practice-home-cta .sectionhead{justify-content:center;gap:16px}
+.scoreboard-dialog-head{position:relative;justify-content:center}
+.scoreboard-dialog-head h2{flex:1;text-align:center;margin:0;padding-left:48px}
+.scoreboard-dialog-head button{flex:0 0 auto}
+.dual-round-entry{gap:20px}
+.dual-round-entry>div{background:#f1f6fa;border:1px solid #d1dfeb;border-radius:12px;padding:12px}
+.dual-round-entry h3{text-align:center;font-size:clamp(17px,2.6vw,23px);min-height:2.5em;display:flex;align-items:center;justify-content:center}
+.dual-round-entry .scoreboard-numbers{gap:7px}
+.dual-round-entry .scoreboard-numbers button{background:#fff;border:1px solid #b7ccdb;color:#153b5b;border-radius:9px}
+.dual-round-entry .scoreboard-numbers button.picked{background:#bc1234!important;color:#fff!important;border-color:#bc1234!important}
+.dual-round-entry .scoreboard-combinations{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}
+.dual-round-entry .scoreboard-combinations button{flex:1 1 110px;background:#e3eff9;border:1px solid #a7bfd1;border-radius:8px;color:#123450;font-weight:700}
+.scoreboard-player-name{font-size:clamp(19px,3vw,29px);font-weight:750;overflow-wrap:anywhere}
+.practice-session-summary{display:flex;flex-direction:column;gap:6px;background:#e7f1fa;border-left:5px solid #bd1235;padding:18px;border-radius:10px;margin:16px 0 22px;color:#153750}
+.practice-session-summary strong{font-size:20px}
+.practice-player-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:16px}
+.practice-player-stats{background:#fff;border:1px solid #c8dce9;border-top:5px solid #bb1233;border-radius:14px;padding:16px;min-width:0}
+.practice-player-stats:nth-child(2){border-top-color:#2466a0}
+.practice-player-stats h3{text-align:center;color:#123450;font-size:23px;overflow-wrap:anywhere}
+.practice-metrics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.practice-metrics>div{display:flex;flex-direction:column;gap:7px;background:#e8f2fb;padding:13px;border-radius:10px;color:#17405e}
+.practice-metrics>div:nth-child(4n+2),.practice-metrics>div:nth-child(4n+3){background:#f3edf1}
+.practice-metrics span{font-size:13px;font-weight:700}
+.practice-metrics strong{font-size:clamp(20px,3vw,28px)}
+.practice-filter{display:block;max-width:330px;font-weight:700;color:#123450;margin:15px 0}
+.pagination{display:flex;justify-content:center;align-items:center;gap:14px;margin-top:18px}
+@media(max-width:650px){.dual-round-entry{gap:8px}.dual-round-entry>div{padding:7px}.dual-round-entry .scoreboard-numbers{gap:5px}.dual-round-entry h3{font-size:16px}.scoreboard-dialog-head h2{font-size:24px}.practice-metrics>div{padding:10px}}
