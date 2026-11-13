@@ -270,3 +270,11 @@ body:not(.in-tournament) .top .tabs button:hover:not(.active){background:#244767
 .round-running{margin-top:9px;text-align:right;color:#526d86;font-size:12px}
 .round-running strong{color:#102c4b;font-size:16px}
 @media(max-width:650px){.zoomtools{justify-content:space-between!important}.zoomtools input[type=range]{width:auto!important;flex:1 1 160px;min-width:120px}.doubles-players{gap:8px}.doubles-player{padding:9px}.round-thrower{padding:6px;gap:5px}.round-thrower .pair-marker{min-width:20px;height:20px}}
+
+.demo-auth{max-width:580px;margin:35px auto;padding:25px;display:grid;gap:14px}
+.demo-auth h1{margin:0}.demo-auth p{color:#526d86}
+.demo-account-option{display:block;width:100%;border:1px solid #c6d8e9;background:#eef5fb;color:#153552;border-radius:10px;padding:16px;text-align:left;font-weight:800;cursor:pointer;margin-bottom:10px}
+.demo-account-option:hover{background:#dcecf9}
+.demo-auth form{display:grid;gap:12px}
+.demo-signout{background:transparent;color:#e7f0fa;border:1px solid #6384a3;border-radius:7px;font-size:12px;padding:5px 9px;cursor:pointer;position:absolute;right:10px;top:4px}
+.top .tabs{position:relative}
