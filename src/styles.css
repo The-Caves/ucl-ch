@@ -58,3 +58,19 @@ body.in-tournament .tournamentstandings table{width:100%;color:#173653}
 body.in-tournament .scorezone{padding-top:4px}
 body.in-tournament .scorefilters .action.primary{background:#102c4b;color:#fff}
 @media(max-width:650px){body.in-tournament .topin{padding:9px 10px 0}body.in-tournament .wrap{padding:0 10px 35px}body.in-tournament .tabs button{font-size:12px;padding:13px 2px}body.in-tournament .tournamentbracket .brackettools{flex-wrap:wrap}.playerlookup{max-width:none;width:100%;flex-basis:100%}.zoomtools{width:100%;justify-content:flex-end}body.in-tournament .bracketcanvas{max-height:calc(100dvh - 295px)}body.in-tournament .tournamentheading h1{font-size:26px}body.in-tournament .tournamentdetail{font-size:12px}}
+
+/* Tournament legibility and touch-friendly controls */
+body.in-tournament .tournamentheading{background:linear-gradient(110deg,#e2edf8,#f5f8fc);border-left:5px solid #b8102c;padding:18px 16px;margin:10px 0 14px;border-radius:0 12px 12px 0}
+body.in-tournament .tournamentheading h1{font-size:clamp(30px,5.4vw,48px);font-weight:950;letter-spacing:-1.3px;line-height:1.12;color:#102c4b}
+body.in-tournament .tournamentdetail{font-size:clamp(14px,2vw,17px);font-weight:650;color:#33516f;gap:8px 18px}
+body.in-tournament .leaderboardtable th:first-child,body.in-tournament .leaderboardtable td:first-child{position:sticky!important;left:0!important;z-index:5!important;background:#eaf2fa!important;color:#102c4b!important;font-weight:850!important;border-right:2px solid #a6bfd7;min-width:170px!important;width:170px!important;max-width:170px!important}
+body.in-tournament .leaderboardtable thead th:first-child{z-index:8!important;background:#102c4b!important;color:#fff!important}
+body.in-tournament .leaderboardtable tbody tr:nth-child(even) td:first-child{background:#d9e8f5!important;color:#102c4b!important}
+body.in-tournament .scorezonecard>div span{font-weight:800;color:#142f4b}
+body.in-tournament .scorezonecard .scorezonehead{color:#315d82}
+.zoomtools input[type=range]{width:clamp(110px,25vw,210px);accent-color:#1768a5;touch-action:pan-x;min-height:36px}
+.zoomtools button{touch-action:manipulation}
+.dashboardreturn{background:transparent;border:1px solid #819bb5;color:#fff;border-radius:8px;padding:10px;font-size:12px;font-weight:850;white-space:nowrap}
+.dashboardreturn:hover{background:#244a70}
+body.in-tournament .bracketcanvas{touch-action:pan-x pan-y;overscroll-behavior:contain}
+@media(max-width:650px){body.in-tournament .tournamentheading h1{font-size:32px}body.in-tournament .tournamentheading{padding:15px 13px}body.in-tournament .tournamentdetail{font-size:14px}.dashboardreturn{grid-column:1/-1;justify-self:start;margin:6px 0 4px}body.in-tournament .tabs{grid-template-columns:repeat(4,minmax(0,1fr))}}
