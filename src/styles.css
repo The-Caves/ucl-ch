@@ -299,3 +299,12 @@ body:not(.in-tournament) .top .tabs button:hover:not(.active){background:#244767
 .round-player:not(.is-throwing){opacity:.58}
 .round-thrower.team-a{border-color:#bf1639}.round-thrower.team-b{border-color:#1768a5}
 @media(max-width:650px){.doubles-matchup{grid-template-columns:minmax(0,1fr);gap:10px}.doubles-versus{padding:3px;text-align:center}.doubles-team{gap:9px}.doubles-team .doubles-player{padding:11px}.round-all-players{gap:6px}.round-player{padding:8px 6px;flex-direction:column;align-items:flex-start}.round-player b{font-size:12px}}
+
+/* Preserve both team identities even when a player is not throwing this round. */
+.round-player.team-a{border-color:#bf1639;background:#fff8fa;color:#153552}
+.round-player.team-b{border-color:#1768a5;background:#f2f8ff;color:#153552}
+.round-player:not(.is-throwing){opacity:1;border-width:1px}
+.round-player.is-throwing{box-shadow:0 0 0 2px rgba(16,44,75,.12);font-weight:800}
+.practice-matchup-selector{margin:10px 0 16px;text-align:left}
+.practice-matchup-selector label{font-weight:750;color:#153552}
+.practice-matchup-selector select{margin-top:8px;width:100%}
