@@ -135,3 +135,38 @@ body.in-tournament .leaderboardtable tbody tr td.playercell,body.in-tournament .
 body.in-tournament .leaderboardtable tbody tr:nth-child(even) td.playercell{background:#dceaf6!important;color:#102d49!important;-webkit-text-fill-color:#102d49!important}
 @media(max-width:650px){.scoreboard-shell{gap:8px}.scoreboard-players{grid-template-columns:1fr;min-height:60dvh}.scoreboard-player{flex-direction:row;min-height:26dvh;gap:8px}.scoreboard-player-name{flex:1;text-align:left;font-size:clamp(16px,5vw,24px)}.scoreboard-total{font-size:clamp(68px,20vw,116px)}.scoreboard-foot{font-size:10px;max-width:58px}.scoreboard-players:has(> :only-child) .scoreboard-player{min-height:55dvh}}
 @media(orientation:landscape) and (max-height:600px){.scoreboard-shell{gap:5px}.scoreboard-players{grid-template-columns:repeat(2,minmax(0,1fr));min-height:45dvh}.scoreboard-player{min-height:0;flex-direction:column}.scoreboard-total{font-size:clamp(58px,13vh,110px)}.scoreboard-rounds{display:none}}
+
+
+/* Practice dashboard and compact scorekeeper refinements */
+.practice-dashboard{max-width:1000px;margin:0 auto;padding:18px 12px}
+.practice-dashboard h1{margin:8px 0 20px}
+.practice-session{width:100%;display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:12px;align-items:center;text-align:left;background:#eef5fa;color:#102e49;border:1px solid #c7d9e8;border-radius:10px;padding:16px;margin:8px 0;cursor:pointer}
+.practice-session strong{overflow-wrap:anywhere}
+.practice-session span{font-size:13px;color:#44647d}
+.practice-name{display:block;margin:12px 0;padding:12px;background:#eff5fa;border-radius:10px}
+.practice-name[hidden]{display:none}
+.practice-name select,.practice-name .guest-name{width:100%;box-sizing:border-box}
+.practice-name .guest-name[hidden]{display:none}
+.guest-choice{display:flex;align-items:center;gap:8px;font-size:13px;margin-top:8px}
+.scoreboard-shell{height:100dvh;min-height:0;overflow:hidden;gap:6px}
+.scoreboard-top{min-height:42px;font-size:clamp(16px,3vw,23px)}
+.scoreboard-players{min-height:0;flex:1;overflow:hidden}
+.scoreboard-player{min-height:0;padding:clamp(8px,2vw,18px)}
+.scoreboard-total{font-size:clamp(60px,13vw,155px)}
+.scoreboard-status{padding:2px;font-size:16px}
+.scoreboard-rounds{display:flex;flex-wrap:nowrap;overflow-x:auto;overscroll-behavior-x:contain;justify-content:flex-start;scroll-snap-type:x proximity;max-width:100%;flex:none;padding:4px 4px 10px;scrollbar-width:thin}
+.scoreboard-rounds .round-history{display:flex;flex-direction:column;gap:4px;align-items:center;justify-content:center;flex:0 0 auto;min-width:76px;background:#1b3d5b;color:#fff;border:1px solid #6585a2;border-radius:9px;padding:9px;scroll-snap-align:start;cursor:pointer}
+.scoreboard-rounds .round-history.selected{border-color:#e7b54c;background:#315e81}
+.scoreboard-rounds .round-history strong{font-size:15px}
+.scoreboard-dialog{width:min(100%,780px);max-height:92dvh;overflow-y:auto}
+.dual-round-entry{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.dual-round-entry>div{min-width:0}
+.dual-round-entry h3{font-size:clamp(14px,2.5vw,20px);overflow-wrap:anywhere;margin:8px 0}
+.dual-round-entry>div>strong{font-size:30px;display:block;margin-bottom:8px}
+.dual-round-entry .scoreboard-numbers{grid-template-columns:repeat(4,minmax(0,1fr));gap:5px}
+.dual-round-entry .scoreboard-numbers button{min-height:44px;font-size:20px;padding:4px}
+.dual-round-entry .scoreboard-combinations button{min-height:42px}
+.scoreboard-dialog>.scoreboard-save{width:100%;margin-top:16px}
+.scoreboard-save:disabled{opacity:.45;cursor:not-allowed}
+@media(max-width:650px){.scoreboard-shell{gap:5px}.scoreboard-players{min-height:0;flex:1}.scoreboard-player{min-height:0;flex-direction:row}.scoreboard-total{font-size:clamp(54px,15vw,90px)}.scoreboard-foot{max-width:70px}.scoreboard-dialog{padding:14px}.dual-round-entry{gap:8px}.dual-round-entry .scoreboard-numbers button{min-height:42px;font-size:18px}.practice-session{grid-template-columns:1fr auto}.practice-session span:last-child{grid-column:1/-1}}
+@media(max-width:390px){.dual-round-entry{grid-template-columns:1fr;max-height:65dvh;overflow-y:auto}.dual-round-entry .scoreboard-numbers{grid-template-columns:repeat(7,minmax(0,1fr))}.dual-round-entry .scoreboard-numbers button{min-height:37px;font-size:15px}}
