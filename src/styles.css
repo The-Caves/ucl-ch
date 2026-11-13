@@ -238,3 +238,35 @@ body.in-tournament .leaderboardtable tbody tr:nth-child(even) td.playercell{back
 
 /* Center the dashboard practice call-to-action in its card. */
 .dashboard-practice{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:18px}.dashboard-practice h2{width:100%;text-align:center;margin:0}.dashboard-practice .action{min-width:220px;max-width:100%}
+
+/* Unified full-width navigation selection */
+body:not(.in-tournament) .top .tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;width:100%;overflow:visible}
+body:not(.in-tournament) .top .tabs button{width:100%;min-width:0;border-radius:0!important;background:transparent!important;color:#d7e5f3;box-shadow:none!important;border:0!important;border-bottom:4px solid transparent!important;padding:15px 4px}
+body:not(.in-tournament) .top .tabs button.active{background:#fff!important;color:#102c4b!important;border-bottom-color:#1768a5!important}
+body:not(.in-tournament) .top .tabs button:hover:not(.active){background:#244767!important}
+.zoomtools{gap:10px;flex-wrap:nowrap}
+.zoomtools input[type=range]{width:clamp(180px,43vw,350px)!important;min-height:48px!important;flex:0 1 350px;touch-action:pan-x}
+.zoomtools input[type=range]::-webkit-slider-thumb{width:28px;height:28px;cursor:grab}
+.zoomtools input[type=range]::-moz-range-thumb{width:28px;height:28px;cursor:grab}
+.zoomtools span{min-width:44px;text-align:right;font-variant-numeric:tabular-nums}
+.doubles-players{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:18px 0}
+.doubles-player{min-width:0;padding:13px;border:3px solid;border-radius:13px;display:flex;flex-direction:column;gap:5px;background:#fff}
+.doubles-player strong{overflow-wrap:anywhere;color:#102c4b}
+.doubles-player>span{font-size:12px;color:#60748c}
+.pair-1{border-color:#c41c3b!important}.pair-2{border-color:#1768a5!important}
+.pair-marker{display:inline-grid;place-items:center;min-width:24px;height:24px;border-radius:5px;background:#c41c3b;color:#fff;font-size:12px;font-weight:900;align-self:flex-start}
+.pair-2 .pair-marker{background:#1768a5}
+.doubles-player-metrics{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:8px}
+.doubles-player-metrics>div{background:#edf4fa;border-radius:7px;padding:7px;display:flex;flex-direction:column;gap:4px}
+.doubles-player-metrics small{color:#526d86;font-size:11px}
+.doubles-player-metrics b{color:#102c4b;font-size:18px}
+.match-rounds{display:grid;gap:12px}
+.match-round{border:1px solid #d5e2ee;border-radius:12px;padding:12px;min-width:0}
+.round-label{font-weight:850;color:#102c4b;margin-bottom:9px}
+.round-throwers{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.round-thrower{display:flex;align-items:center;gap:7px;min-width:0;padding:9px;border:2px solid;border-radius:9px}
+.round-thrower>span:not(.pair-marker){overflow-wrap:anywhere;font-size:12px;font-weight:750;min-width:0}
+.round-thrower b{margin-left:auto;font-size:22px;color:#102c4b}
+.round-running{margin-top:9px;text-align:right;color:#526d86;font-size:12px}
+.round-running strong{color:#102c4b;font-size:16px}
+@media(max-width:650px){.zoomtools{justify-content:space-between!important}.zoomtools input[type=range]{width:auto!important;flex:1 1 160px;min-width:120px}.doubles-players{gap:8px}.doubles-player{padding:9px}.round-thrower{padding:6px;gap:5px}.round-thrower .pair-marker{min-width:20px;height:20px}}
