@@ -21,3 +21,40 @@
 
 /* Tournament-specific navigation and accessible match contrast */
 .tournamentheading{padding:10px 0 18px;margin:0}.tournamentheading h1{margin:5px 0 10px;font-size:clamp(25px,4vw,36px)}.tournamentdetail{display:flex;flex-wrap:wrap;gap:9px 16px;color:#c4d5e6;font-size:13px}.tournamentdetail span:first-child{background:#8c1b35;color:#fff;border-radius:99px;padding:3px 10px;font-weight:800}.tournamentpage .tournamentbracket{margin-top:0}.top .tabs{overflow-x:auto;scrollbar-width:none;max-width:100%}.top .tabs button{white-space:nowrap}.scorezonetools{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin:12px 0 18px}.scorefilters{display:flex;gap:6px}.scorefilters .action{padding:10px 13px}.scorezonetools .field{flex:1;min-width:175px;max-width:360px}.leaderboardtable{min-width:820px}.leaderboardtable th:first-child,.leaderboardtable td:first-child{position:sticky!important;left:0!important;min-width:145px!important;width:145px!important;max-width:145px!important;text-align:left!important;background:#152235!important;color:#fff!important;z-index:3}.leaderboardtable th:nth-child(2),.leaderboardtable td:nth-child(2){position:static!important;min-width:75px!important;max-width:none!important;background:transparent!important;color:inherit!important}.leaderboardtable thead th{background:#102c4b!important;color:#fff!important}.tournamentstatspage{background:#152235!important;color:#f7f9fc!important;border-color:#40516a}.tournamentstatspage .roundtable tbody tr:nth-child(even){background:#223249!important}.tournamentstatspage .roundtable tbody td{color:#f7f9fc!important}.tournamentstatspage .roundtable tbody tr:nth-child(even) td:first-child{background:#223249!important}.tournamentstatspage .roundtable tbody tr:nth-child(odd) td:first-child{background:#152235!important}.statcompare{background:#17263a;color:#f7f9fc}.statcompare>div:nth-child(odd){background:#223650;color:#f7f9fc}.statcompare>div:nth-child(even){background:#17263a;color:#f7f9fc}.statcompare span,.statcompare strong{color:#f7f9fc}.scoreline .scorename{color:#173653}.scoreline .scoreposition{color:#4e6782}.roundtable{overflow-x:auto}.tournamentstandings{background:#152235;border-radius:12px;padding:20px}.tournamentstandings th,.tournamentstandings td{padding:12px 16px;text-align:left}@media(max-width:750px){.topin{gap:10px;padding:10px 12px;flex-wrap:wrap}.top .tabs{order:3;width:100%;justify-content:space-between}.top .tabs button{flex:1;padding:10px 6px;font-size:12px}.tournamentpage .tournamentheading{padding-top:6px}.scorefilters{width:100%}.scorefilters .action{flex:1}.scorezonetools .field{max-width:none}.leaderboardtable{min-width:760px}.tournamentstatspage{padding:8px!important}}
+
+/* Mobile-first tournament workspace */
+body.in-tournament .wrap{max-width:none;padding:0 14px 40px}
+body.in-tournament .footer{display:none}
+body.in-tournament .topin{max-width:none}
+body.in-tournament .tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));width:100%;gap:0;border-top:1px solid #7e9bb7}
+body.in-tournament .tabs button{width:100%;border-radius:0;padding:15px 4px;background:transparent;color:#e7f0fa}
+body.in-tournament .tabs button.active{background:#fff;color:#102c4b;box-shadow:inset 0 -4px #1768a5}
+body.in-tournament .tournamentheading{padding:14px 0 12px;margin:0}
+body.in-tournament .tournamentheading h1{font-size:clamp(24px,5vw,38px);letter-spacing:-.8px;line-height:1.12;margin:0 0 10px;font-weight:850}
+body.in-tournament .tournamentdetail{display:flex;gap:5px 15px;color:#49637e;font-size:14px;align-items:center}
+body.in-tournament .tournamentdetail span:first-child{background:transparent;color:#49637e;border:0;padding:0;border-radius:0;font-weight:600}
+body.in-tournament .tournamentbracket{border-top:0}
+body.in-tournament .tournamentbracket .brackettools{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:0 0 12px}
+.playerlookup{position:relative;flex:1;min-width:160px;max-width:440px}
+.playerlookup .field{width:100%;max-width:none!important;padding-right:42px}
+.searchclear{position:absolute;right:8px;top:50%;transform:translateY(-50%);background:transparent;border:0;font-size:24px;color:#637d95;padding:2px 9px}
+.playersuggestions:not(:empty){position:absolute;top:100%;left:0;right:0;z-index:30;background:#fff;border:1px solid #ccd9e7;border-radius:10px;box-shadow:0 8px 22px #132e4a33;max-height:220px;overflow:auto}
+.playersuggestions button{display:block;width:100%;text-align:left;background:#fff;color:#142d47;border:0;padding:13px 15px;font-weight:700}
+.playersuggestions button:hover{background:#eaf3fb}
+.zoomtools{display:flex;align-items:center;gap:4px;color:#183b5c;font-size:12px;font-weight:800}
+.zoomtools button{background:#e5eef7;color:#102c4b;border:1px solid #c6d8e9;border-radius:7px;min-width:34px;height:38px;font-weight:850}
+.zoomtools button:last-child{padding:0 8px}
+body.in-tournament .bracketcanvas{max-height:calc(100dvh - 240px);min-height:430px;border-radius:12px}
+body.in-tournament .tournamentstatspage{background:#fff!important;color:#18334e!important;border:0;border-radius:0;padding:10px 0!important}
+body.in-tournament .tournamentstatspage .roundtable{max-height:none;overflow-x:auto;overscroll-behavior-x:contain}
+body.in-tournament .leaderboardtable{min-width:900px}
+body.in-tournament .leaderboardtable th:first-child,body.in-tournament .leaderboardtable td:first-child{position:static!important;width:170px!important;min-width:170px!important;max-width:170px!important;white-space:normal!important;text-align:left!important}
+body.in-tournament .leaderboardtable tbody td{background:#fff!important;color:#18334e!important}
+body.in-tournament .leaderboardtable tbody tr:nth-child(even) td{background:#eaf2f9!important}
+body.in-tournament .leaderboardtable thead th{background:#102c4b!important;color:#fff!important}
+.statstools{margin:0 0 12px}.statstools .field{width:100%;max-width:420px}
+body.in-tournament .tournamentstandings{background:#fff;color:#173653;padding:8px 0}
+body.in-tournament .tournamentstandings table{width:100%;color:#173653}
+body.in-tournament .scorezone{padding-top:4px}
+body.in-tournament .scorefilters .action.primary{background:#102c4b;color:#fff}
+@media(max-width:650px){body.in-tournament .topin{padding:9px 10px 0}body.in-tournament .wrap{padding:0 10px 35px}body.in-tournament .tabs button{font-size:12px;padding:13px 2px}body.in-tournament .tournamentbracket .brackettools{flex-wrap:wrap}.playerlookup{max-width:none;width:100%;flex-basis:100%}.zoomtools{width:100%;justify-content:flex-end}body.in-tournament .bracketcanvas{max-height:calc(100dvh - 295px)}body.in-tournament .tournamentheading h1{font-size:26px}body.in-tournament .tournamentdetail{font-size:12px}}
