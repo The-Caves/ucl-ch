@@ -96,3 +96,42 @@ body.in-tournament .leaderboardtable tbody tr:nth-child(even) td.playercell{back
 .practicescores{display:grid;grid-template-columns:1fr 1fr;gap:12px}.practiceplayer{border:2px solid #cbdce9;border-radius:14px;padding:16px 8px;display:flex;align-items:center;flex-direction:column;gap:6px;min-width:0}.practiceplayer.hasfirst{border-color:#bd1431;box-shadow:inset 0 0 0 1px #bd1431}.practiceplayername{font-weight:800;font-size:clamp(13px,3vw,18px);text-align:center;overflow-wrap:anywhere}.practiceplayer strong{font-size:clamp(36px,8vw,58px)}.firstbaglabel{min-height:16px;color:#b70d2b;font-weight:900;font-size:11px;letter-spacing:.05em}
 .roundpick{display:grid;grid-template-columns:1fr 1fr;gap:12px}.roundscore{border:2px solid #91adc6;background:#eaf3fb;color:#102d49;border-radius:12px;padding:12px;display:flex;align-items:center;flex-direction:column;gap:6px;cursor:pointer}.roundscore strong{font-size:44px}.roundscore.picked{border-color:#0c70ae;background:#d2e8fa}
 .numberpad{margin-top:16px;padding:14px;background:#e8f1f9;border:1px solid #c7d9e9;border-radius:14px}.numbergrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}.numbergrid button{min-height:54px;border:1px solid #a5c1d9;border-radius:10px;background:#fff;color:#102d49;font-size:24px;font-weight:850;cursor:pointer}.numbergrid button:active{background:#1b618e;color:#fff}.bagchoices{display:grid;gap:8px;margin-top:12px}.bagchoices button{border:1px solid #9ebcd4;background:#fff;border-radius:10px;padding:13px;font-weight:800;color:#153d62}.commitround{margin-top:16px;width:100%}.commitround:disabled{opacity:.45;cursor:not-allowed}.practiceroundlist{margin:18px 0}
+
+
+/* Standalone scorekeeper: phone and tablet */
+body.scoreboard-active{background:#071728}
+body.scoreboard-active #nav,body.scoreboard-active .siteheader,body.scoreboard-active footer{display:none!important}
+body.scoreboard-active #view{max-width:none!important;width:100%!important;padding:0!important;margin:0!important}
+body.scoreboard-active main{max-width:none!important;padding:0!important;margin:0!important}
+.scoreboard-shell{min-height:100dvh;background:#071728;color:#fff;display:flex;flex-direction:column;position:relative;padding:env(safe-area-inset-top) max(12px,env(safe-area-inset-right)) env(safe-area-inset-bottom) max(12px,env(safe-area-inset-left));box-sizing:border-box;gap:12px}
+.scoreboard-top{display:flex;align-items:center;justify-content:space-between;min-height:56px;padding:6px 8px;font-size:clamp(20px,4vw,30px)}
+.scoreboard-menu-button{background:#1e3c58;color:#fff;border:1px solid #67819b;border-radius:12px;font-size:22px;min-width:52px;min-height:48px;cursor:pointer}
+.scoreboard-menu{position:absolute;z-index:12;right:18px;top:70px;display:grid;gap:4px;padding:8px;background:#fff;border-radius:12px;box-shadow:0 12px 30px #0008;min-width:210px}
+.scoreboard-menu button{background:transparent;border:0;text-align:left;padding:14px;color:#12304c;font-weight:750;font-size:15px}
+.scoreboard-players{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;flex:1;min-height:340px}
+.scoreboard-players:has(> :only-child){grid-template-columns:1fr}
+.scoreboard-player{min-width:0;min-height:0;border:3px solid #426b91;background:#fff;color:#12304c;border-radius:18px;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:clamp(12px,3vw,30px);cursor:pointer;gap:8px}
+.scoreboard-player:first-child{border-color:#c01636}.scoreboard-player:nth-child(2){border-color:#2775b0}
+.scoreboard-player.has-first{outline:4px solid #f1bc4b;outline-offset:-9px}
+.scoreboard-player-name{font-size:clamp(17px,3.2vw,30px);font-weight:850;line-height:1.2;text-align:center;overflow-wrap:anywhere;width:100%}
+.scoreboard-total{font-size:clamp(72px,17vw,210px);line-height:1;font-weight:900;font-variant-numeric:tabular-nums}
+.scoreboard-foot{min-height:20px;font-size:clamp(11px,1.8vw,15px);font-weight:850;letter-spacing:.05em}
+.scoreboard-status{text-align:center;font-size:clamp(16px,3vw,22px);font-weight:800;padding:6px}
+.scoreboard-save{background:#c01535;color:#fff;border:0;border-radius:12px;padding:17px;font-size:18px;font-weight:850;cursor:pointer}
+.scoreboard-rounds{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;padding-bottom:8px}
+.scoreboard-rounds>div{display:flex;gap:12px;align-items:center;background:#1a3551;border-radius:8px;padding:8px 12px;font-size:13px}
+.scoreboard-overlay{position:fixed;inset:0;background:#04101ed9;display:grid;place-items:center;z-index:100;padding:16px;box-sizing:border-box}
+.scoreboard-dialog{background:#fff;color:#12304c;border-radius:20px;width:min(100%,520px);max-height:90dvh;overflow-y:auto;padding:clamp(18px,4vw,28px);box-sizing:border-box;box-shadow:0 20px 70px #0009}
+.scoreboard-dialog h2{font-size:clamp(21px,5vw,30px);margin:0 0 12px;overflow-wrap:anywhere}
+.scoreboard-dialog-head{display:flex;align-items:start;justify-content:space-between;gap:10px}
+.scoreboard-dialog-head>button{border:0;background:#e9eff5;border-radius:50%;width:42px;height:42px;flex:none;font-size:27px;color:#12304c}
+.scoreboard-numbers{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px}
+.scoreboard-numbers button,.firstbag-choices button,.scoreboard-combinations button{border:1px solid #b7cadb;border-radius:12px;background:#e9f2fa;color:#12304c;min-height:62px;font-size:25px;font-weight:850;cursor:pointer}
+.firstbag-choices,.scoreboard-combinations{display:grid;gap:10px;margin-top:16px}
+.firstbag-choices button,.scoreboard-combinations button{font-size:17px;padding:10px}
+.game-setup{max-width:640px;margin:auto;padding:24px 14px}
+#opponentField[hidden]{display:none}
+body.in-tournament .leaderboardtable tbody tr td.playercell,body.in-tournament .leaderboardtable tbody tr:nth-child(odd) td.playercell{background:#14283f!important;color:#fff!important;-webkit-text-fill-color:#fff!important}
+body.in-tournament .leaderboardtable tbody tr:nth-child(even) td.playercell{background:#dceaf6!important;color:#102d49!important;-webkit-text-fill-color:#102d49!important}
+@media(max-width:650px){.scoreboard-shell{gap:8px}.scoreboard-players{grid-template-columns:1fr;min-height:60dvh}.scoreboard-player{flex-direction:row;min-height:26dvh;gap:8px}.scoreboard-player-name{flex:1;text-align:left;font-size:clamp(16px,5vw,24px)}.scoreboard-total{font-size:clamp(68px,20vw,116px)}.scoreboard-foot{font-size:10px;max-width:58px}.scoreboard-players:has(> :only-child) .scoreboard-player{min-height:55dvh}}
+@media(orientation:landscape) and (max-height:600px){.scoreboard-shell{gap:5px}.scoreboard-players{grid-template-columns:repeat(2,minmax(0,1fr));min-height:45dvh}.scoreboard-player{min-height:0;flex-direction:column}.scoreboard-total{font-size:clamp(58px,13vh,110px)}.scoreboard-rounds{display:none}}
