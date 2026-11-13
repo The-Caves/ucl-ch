@@ -11,6 +11,14 @@ Run `python3 -m http.server 8000` and open http://localhost:8000. Run `npm test`
 ## Deploy
 GitHub Pages workflow is included. In repository Settings → Pages, choose GitHub Actions as the source. Publishing requires successful workflow completion.
 
+## Tournament discovery and sample season
+The demo seeds 10 completed fictional events (six singles, four doubles) with consistent simulated bracket results, per-round bag logs, and a competitive example player record. Singles and doubles statistics are separated; doubles PPR credits only rounds actually thrown by the selected teammate, and doubles ratings are calculated independently. Upcoming/live demonstrations remain available alongside the history.
+
+Tournament discovery includes search, status chips, sorting, expandable date/city controls, and pagination. The dashboard highlights active matches separately from matches up next. Fixture data is versioned in browser storage; sample season updates may replace earlier fictional fixtures but do not represent real competitions.
+
+## Development
+Run `npm test` to validate the engine, scorecards, historical fixtures and player statistics. GitHub Actions runs tests on pull requests and before Pages publication.
+
 ## Limitations
 All sample people, events and scores are fictional. This is a single-browser demonstration, not a real multiuser tournament backend. No official league feed, account system, realtime synchronization, secure director authentication, full double-elimination bracket, payments or native store apps. A production implementation needs a verified score/audit pipeline and permissioned server.
 
