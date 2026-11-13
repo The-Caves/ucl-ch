@@ -14,7 +14,7 @@ GitHub Pages workflow is included. In repository Settings → Pages, choose GitH
 ## Tournament discovery and sample season
 The demo seeds 10 completed fictional events (six singles, four doubles) with consistent simulated bracket results, per-round bag logs, and a competitive example player record. Singles and doubles statistics are separated; doubles PPR credits only rounds actually thrown by the selected teammate, and doubles ratings are calculated independently. Upcoming/live demonstrations remain available alongside the history.
 
-Tournament discovery includes search, status chips, sorting, expandable date/city controls, and pagination. The dashboard highlights active matches separately from matches up next. Fixture data is versioned in browser storage; sample season updates may replace earlier fictional fixtures but do not represent real competitions.
+Tournament discovery includes search, status chips, sorting, expandable date/city controls, and pagination. My Tournaments has its own full searchable list of enrolled/saved events, while the dashboard previews only a few recent events. Player profiles show the last three matches with a separate searchable full match history. The dashboard highlights active matches separately from matches up next. Fixture data is versioned in browser storage; sample season updates may replace earlier fictional fixtures but do not represent real competitions.
 
 ## Development
 Run `npm test` to validate the engine, scorecards, historical fixtures and player statistics. GitHub Actions runs tests on pull requests and before Pages publication.

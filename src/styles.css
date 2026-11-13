@@ -411,3 +411,97 @@ body:not(.in-tournament) .top .tabs button:hover:not(.active){background:#244767
  .profile-match-row{grid-template-columns:minmax(0,1fr) auto;gap:8px}
  .profile-match-row .action.tournament-view{grid-column:1/-1;width:100%}
 }
+
+
+/* Readable event cards and compact, easy-to-scan match history (Nov 2026). */
+.competition-section .tournament-list{gap:15px}
+.competition-section .tournament-list .tournament-row{
+  min-height:98px;
+  padding:18px 20px;
+  border:2px solid #cbdce9;
+  border-left:5px solid #7598b6;
+  border-radius:13px;
+  background:#fff;
+  box-shadow:0 3px 12px rgba(23,55,85,.055);
+}
+.competition-section .tournament-list .tournament-row:nth-child(even){background:#f6faff}
+.competition-section .tournament-list .tournament-row:has(.status-active){border-left-color:#20945a}
+.competition-section .tournament-list .tournament-row:has(.status-upcoming){border-left-color:#2877b7}
+.competition-section .tournament-list .tournament-row:has(.status-completed){border-left-color:#697f95}
+.competition-section .tournament-list .tournament-row:hover{
+  border-color:#96b6d0;
+  border-left-color:#155a96;
+  background:#f1f8ff;
+  box-shadow:0 5px 17px rgba(18,66,104,.12);
+}
+.competition-section .tournament-row-heading strong{font-size:17px;line-height:1.45;color:#102b44}
+.competition-section .tournament-dashboard-info p{font-size:13px;line-height:1.5;color:#46637d}
+.my-tournament-page .competition-section{margin-top:18px}
+.my-tournament-search{
+  margin:16px 0 20px;
+  padding:16px;
+  border:1px solid #c5d8e7;
+  border-radius:12px;
+  background:#f1f7fc;
+}
+.my-tournament-search>label{display:block;margin-bottom:8px;font-size:13px;font-weight:850;color:#163e5e}
+.my-tournament-search-controls{display:flex;align-items:center;gap:10px}
+.my-tournament-search-controls .field{flex:1;min-width:0;width:100%;margin:0;height:44px;background:#fff;border:1px solid #a9c0d5;border-radius:9px;color:#143451}
+.my-tournament-search-controls .field:focus-visible{outline:3px solid #9ac6e5;outline-offset:1px;border-color:#145a91}
+.my-tournament-search .search-helper{display:block;margin-top:10px;color:#496d89;font-weight:650}
+.search-clear-button{min-width:62px;height:40px;padding:0 12px;border:1px solid #7d9db7;border-radius:9px;color:#204968;background:#fff;font-size:12px;font-weight:800;cursor:pointer}
+.search-clear-button:hover{background:#e2f1fb}
+.navigation-back{margin-top:8px;padding:9px 13px;min-height:39px;border:1px solid #7e9eba!important;border-radius:9px;background:#fff!important;color:#194a70!important;font-weight:800}
+.profile-page .profile-actions{display:flex;gap:9px;flex-wrap:wrap}
+.profile-page .profile-actions .action{min-height:39px;padding:9px 13px;font-size:13px;font-weight:800;border:2px solid #9cb7cf;border-radius:10px}
+.profile-page .profile-actions .action.primary{border-color:#1c659e}
+.profile-history-section{margin-top:25px}
+.profile-history-section .tournament-list{gap:14px}
+.profile-history-section .profile-match-row{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 34px 106px;
+  align-items:center;
+  gap:12px;
+  border:2px solid #c9d9e6;
+  border-left:5px solid #779dbb;
+  border-radius:12px;
+  padding:15px 17px;
+  background:#fff;
+  box-shadow:0 2px 9px rgba(21,58,87,.06);
+}
+.profile-history-section .profile-match-row:nth-child(even){background:#f5f9fd}
+.profile-history-section .profile-match-row:has(.history-result.win){border-left-color:#2a9464}
+.profile-history-section .profile-match-row:has(.history-result.loss){border-left-color:#bf6574}
+.profile-match-info{min-width:0;overflow-wrap:anywhere}
+.profile-history-section .profile-match-info strong{font-size:16px;line-height:1.4;color:#14344e}
+.profile-history-section .profile-match-info p{line-height:1.5;margin:7px 0 0;color:#4a6a84}
+.profile-history-section .profile-match-row .action.match-view{
+  width:106px;
+  min-height:38px;
+  height:auto;
+  padding:7px 8px;
+  font-size:12px;
+  border:2px solid #155a9a!important;
+  background:#fff!important;
+  color:#16568d!important;
+  border-radius:9px;
+  box-shadow:none;
+}
+.profile-history-section .profile-match-row .action.match-view:hover{background:#155a9a!important;color:#fff!important}
+.profile-history-section .profile-match-row .action.match-view:focus-visible{outline:3px solid #e3b04d;outline-offset:2px}
+.profile-history-section .history-result{border:1px solid currentColor}
+.history-disclaimer{margin:16px 0 0;color:#59738a}
+@media(max-width:600px){
+  .competition-section .tournament-list .tournament-row{padding:15px;min-height:0}
+  .competition-section .tournament-row-heading strong{font-size:16px}
+  .competition-section .tournament-dashboard-info p{font-size:12px}
+  .profile-history-section .profile-match-row{grid-template-columns:minmax(0,1fr) auto;grid-template-rows:auto auto;padding:14px;gap:9px}
+  .profile-history-section .profile-match-info{grid-column:1;grid-row:1 / 3}
+  .profile-history-section .history-result{grid-column:2;grid-row:1;justify-self:end}
+  .profile-history-section .profile-match-row .action.match-view{grid-column:2;grid-row:2;width:102px;justify-self:end}
+}
+@media(max-width:370px){
+  .profile-page .profile-actions .action{padding:8px 10px}
+  .my-tournament-search{padding:12px}
+  .profile-history-section .profile-match-row{padding:12px 10px}
+}
