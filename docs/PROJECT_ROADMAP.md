@@ -79,3 +79,14 @@ See [Director Tournament Epic](DIRECTOR_TOURNAMENT_EPIC.md).
 - [ ] Penetration review, security headers, audit retention, backup restore drills and production pilot approval
 
 See [Production Infrastructure, Accounts & Security](PRODUCTION_AUTH_SECURITY.md). Do not treat the current demo login/director toggle as a production security boundary.
+
+## Nationwide scale planning — architecture only (2026-11-17)
+- [ ] Move public site from GitHub Pages to a production CDN host (e.g., Cloudflare Pages/Workers) with a custom domain, TLS, WAF, versioned deploys and rollbacks.
+- [ ] Keep one centralized authoritative Postgres database initially (US East is a reasonable US default); use indexes, pooled DB connections and paginate/cached public results.
+- [ ] Separate public high-volume spectator reads from privileged scoring writes: CDN/cache published standings; use private scoped Realtime only where scores truly need live updates.
+- [ ] Benchmark event simulations: 10, 50 and 100 simultaneous multi-board events; separately simulate spectator bursts of 500, 2,000 and 10,000 viewers.
+- [ ] Capacity-plan Supabase Realtime limits: current capped Pro tier 500 concurrent connections/500 messages per second; Pro without spend cap permits up to 10,000 connections and 2,500 messages per second, subject to pricing and load testing. Check provider limits again at deployment.
+- [ ] Add availability targets, dashboards, connection/message-rate and p95 latency metrics, peak event-day alerting, automatic retries and fail-safe offline scoring.
+- [ ] Validate multi-tenant security under concurrency, schema growth, backups and tested disaster recovery before claiming nationwide readiness.
+
+The proposed infrastructure can serve geographically distributed US users, but these scale tests and the backend are NOT implemented. Sources: https://supabase.com/docs/guides/realtime/limits and https://developers.cloudflare.com/pages/platform/limits/.
