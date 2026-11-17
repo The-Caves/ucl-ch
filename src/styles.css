@@ -765,3 +765,77 @@ body.bracket-mode .tournamentbracket{margin:0}
 /* Keep long completed-event histories readable without hiding older events. */
 .hub-profile-section-grid>.hub-profile-events{max-height:570px;overflow-y:auto;overscroll-behavior:contain}
 @media(max-width:550px){.hub-profile-section-grid>.hub-profile-events{max-height:490px}}
+
+
+/* Board Command Center — director-run local scoring pilot */
+.board-command{max-width:1250px;margin:0 auto}
+.board-floor-lead{max-width:780px;color:#536e86}
+.board-local-notice{margin:16px 0;background:#fff8e8;border:1px solid #e5cca0;border-left:5px solid #c89131;color:#73551b;padding:13px 16px;border-radius:9px;font-size:13px;line-height:1.5}
+.board-local-notice strong{font-weight:900}
+.board-floor-controls{display:flex;align-items:end;gap:12px;flex-wrap:wrap;padding:15px;background:#edf5fb;border:1px solid #c8dbe9;border-radius:13px}
+.board-floor-controls label{flex:1 1 240px;min-width:0;color:#254d6e;font-size:12px;font-weight:900}
+.board-floor-controls select{display:block;margin-top:8px;width:100%;min-height:43px;background:#fff;border:1px solid #a7c3d7;border-radius:9px}
+.board-floor-controls .action{min-height:43px;border:2px solid #146498;border-radius:9px;padding:10px 15px;font-weight:850}
+.board-floor-summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px;margin:17px 0}
+.board-floor-summary span{padding:15px;text-align:center;border:1px solid #ccdeec;border-radius:11px;background:#fff;color:#5b738b;font-size:13px;font-weight:800}
+.board-floor-summary strong{display:block;color:#194666;font-size:27px}
+.board-floor-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:14px}
+.board-floor-card{border:2px solid #c5d9e7;border-top:5px solid #25825b;border-radius:13px;padding:16px;background:#fff;min-height:196px}
+.board-floor-card.occupied{border-top-color:#176da4;background:#f7fbff}
+.board-floor-top{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.board-floor-top h3{color:#143c59;margin:0;font-size:19px}
+.board-floor-status{white-space:nowrap;padding:6px 9px;border-radius:20px;font-size:10px;font-weight:900}
+.board-floor-status.available{color:#196943;background:#e5f6ed}
+.board-floor-status.occupied{color:#185b8c;background:#dfedf9}
+.board-floor-match{font-size:14px;color:#284c69;font-weight:850;margin:18px 0 6px;min-height:24px}
+.board-floor-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-top:18px}
+.board-floor-actions .action{padding:8px 7px;min-height:41px;border:2px solid #b5ccdc;border-radius:9px;font-size:12px;font-weight:850;white-space:normal}
+.board-floor-actions .action.primary{background:#186a9c;border-color:#186a9c;color:#fff}
+.board-kiosk .wrap{max-width:100%;padding:12px 18px 35px}
+.board-kiosk .top{display:none}
+.board-tablet{max-width:1050px;margin:0 auto}
+.board-tablet-header{display:flex;align-items:center;justify-content:space-between;gap:18px;background:#143d60;border-radius:15px;padding:17px 21px;color:white}
+.board-tablet-header span{color:#c7dfef;letter-spacing:.12em;font-size:11px;font-weight:900}
+.board-tablet-header h1{margin:4px 0 0;font-size:clamp(27px,4vw,40px);color:white}
+.board-tablet-header .action{min-height:42px;background:#fff;border:2px solid #fff;color:#16415c;font-weight:900;border-radius:9px}
+.board-match-title{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:17px 0;color:#254f70}
+.board-match-title strong{font-size:18px}
+.board-match-title span{background:#e4f3ff;color:#195e92;border-radius:99px;padding:8px 12px;font-size:12px;font-weight:850}
+.board-big-score{display:grid;grid-template-columns:minmax(0,1fr) 30px minmax(0,1fr);gap:10px;align-items:center;padding:22px 16px;background:#fff;border:2px solid #b5d0e2;border-radius:16px;box-shadow:0 7px 18px #17375513}
+.board-big-score>div{display:flex;flex-direction:column;gap:5px;align-items:center;text-align:center;min-width:0}
+.board-big-score span{font-size:clamp(14px,2.3vw,20px);font-weight:850;color:#254a6b;overflow-wrap:anywhere}
+.board-big-score strong{font-size:clamp(62px,12vw,105px);font-weight:950;line-height:1.1;color:#194e78;font-variant-numeric:tabular-nums}
+.board-big-score b{color:#95b0c4;text-align:center;font-size:27px}
+.board-round-teams{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px;margin-top:16px}
+.board-score-entry-team{display:grid;gap:12px;border:2px solid #c4dae9;border-top:5px solid #156a9e;border-radius:12px;background:#fff;padding:18px}
+.board-score-entry-team:nth-child(2){border-top-color:#b91839}
+.board-score-entry-team h3{margin:0 0 5px;color:#1d476a;font-size:20px;overflow-wrap:anywhere}
+.board-score-entry-team label{display:flex;flex-direction:column;gap:8px;color:#2f5572;font-size:14px;font-weight:850}
+.board-score-entry-team .field{width:100%;height:54px;margin:0;background:#f7fbfe;border:1px solid #abc5d9;border-radius:10px;font-size:24px;font-weight:900;color:#164968}
+.board-score-entry-team .board-thrower .field{font-size:16px}
+.board-save-round{display:block;width:100%;min-height:66px;border:0;border-radius:12px;background:#18754f;color:#fff;font-size:24px;font-weight:900;letter-spacing:.01em;margin-top:16px;cursor:pointer}
+.board-save-round:hover{background:#126441}
+.board-saved-rounds{margin-top:18px;border:1px solid #cfdeea;border-radius:13px;background:#fff;padding:18px}
+.board-saved-rounds h2{margin:0 0 12px;color:#204a6a}
+.board-saved-rounds>div{display:flex;justify-content:space-between;align-items:center;gap:12px;border-top:1px solid #dbe6ee;padding:12px 3px;color:#496a82;font-size:13px}
+.board-saved-rounds strong{font-size:18px;color:#194d76}
+.board-waiting{margin-top:20px;padding:34px 24px;text-align:center;background:#fff;border:2px dashed #afc7d9;border-radius:15px}
+.board-waiting h2{color:#155280}
+.board-waiting p{color:#658198}
+.board-last-match{font-size:12px;overflow-wrap:anywhere}
+@media(max-width:650px){
+ .board-floor-summary{gap:6px}
+ .board-floor-summary span{padding:11px 3px;font-size:11px}
+ .board-floor-summary strong{font-size:22px}
+ .board-kiosk .wrap{padding:8px 9px 25px}
+ .board-tablet-header{padding:14px}
+ .board-tablet-header .action{font-size:12px;padding:7px 9px}
+ .board-round-teams{gap:9px}
+ .board-score-entry-team{padding:11px;gap:9px}
+ .board-score-entry-team h3{font-size:14px}
+ .board-score-entry-team label{font-size:12px}
+ .board-score-entry-team .field{height:51px;font-size:23px}
+ .board-big-score{padding:14px 7px}
+ .board-score-entry-team .board-thrower .field{font-size:12px}
+ .board-save-round{font-size:21px;min-height:58px}
+}
