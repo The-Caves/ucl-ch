@@ -81,3 +81,8 @@ For nationwide availability, move the static UI to a globally distributed CDN ho
 **Graduated acceptance gates:** Single-venue pilot with 6–12 tablets, then 10, 50, and 100 concurrently active multi-board events, plus 500/2,000/10,000 spectator bursts. Measure p95/p99 API and round-to-screen latency, errors, peak Realtime connections and broadcasts, DB saturation, recovery and isolation. Upgrade compute or split public read workloads only after measurements; consider replica/caching architecture and specialized realtime providers if bottlenecks justify them. Multi-region databases are unnecessary at initial nationwide launch and introduce consistency/operational complexity.
 
 Until the real backend is connected and these tests pass, nationwide operations are a **design target, not a shipped capability**.
+
+## Spectator load and public data isolation
+Public spectator traffic must be separated from protected scoring and member data. Serve public result snapshots through a cacheable read model, and restrict director/board operations to authenticated, transactional commands. Even at 5,000 concurrent visitors, **not** every page needs a websocket; direct Realtime fanout to that many clients has independent message/second limitations. Public CDN caches must never contain email, private profiles, membership, fees, payments, tokens or drafts. See [Spectator-First Nationwide Architecture](SPECTATOR_SCALING_ARCHITECTURE.md).
+
+Production performance targets require both distributed (5,000 viewers across many events) and concentrated (5,000 viewers watching one event) load tests, with simulated scoring bursts, reconnection, offline venue and privacy/RLS checks. These are future acceptance tests, not achieved capacity.
