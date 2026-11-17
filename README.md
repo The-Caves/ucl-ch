@@ -51,6 +51,9 @@ A **staged** Supabase Auth/PostgreSQL migration and account service are included
 ## Nationwide live spectator experience (planned)
 UCL is intended to be a **public live cornhole scoreboard for spectators nationwide**, not just a director app. The production roadmap includes Today / Live discovery, searchable player-to-current-match tracking, event-wide scores, shareable deep links, public read-only snapshots through a CDN, and selective low-latency updates for active spectators. We will test **5,000 concurrent spectators across many events and 5,000 watching one event** separately. Those tests and the scalable public APIs are **not yet implemented**. See [Spectator-First Nationwide Architecture](docs/SPECTATOR_SCALING_ARCHITECTURE.md) and [Project Roadmap](docs/PROJECT_ROADMAP.md).
 
+## Next milestone: real database + repeatable private pilot
+The next blocker is not merely a database subscription: UCL needs **shared persistent event data, authenticated transactions and live spectator reads** so a director laptop, a board tablet and a spectator phone all see the same official score. The repo now includes a daily/manual GitHub Actions **Pilot Readiness Checks** workflow with local tests and an *opt-in* read-only Supabase staging smoke test. The staging test is disabled until a real staging project, dedicated test accounts and protected secrets are configured. It does not perform scoring writes, create a database or fix defects autonomously. The recommended organization pitch is a scripted private pilot with clearly fictional records and genuine cross-device sync. See [Pilot and Demo Readiness](docs/PILOT_DEMO_READINESS.md).
+
 ## Development
 Run `npm test` to validate the engine, scorecards, historical fixtures and player statistics. GitHub Actions runs tests on pull requests and before Pages publication.
 
