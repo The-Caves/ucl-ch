@@ -63,11 +63,12 @@ function assertReason(actor,reason){
 }
 function summaryForRounds(snapshot,match){
  const rows=snapshot.scorecards.filter(x=>x.matchId===match.id);
- return scorecard(rows,match.a,match.b);
+ return scorecard(rows,match.a,match.b,{maxRounds:Number(snapshot.events.find(t=>t.id===match.eventId)?.roundLimit||0)});
 }
 function applyResult(snapshot,match,{scoreA,scoreB,forfeit=false}){
  const a=Number(scoreA),b=Number(scoreB);
- if(!validScore(a,b))throw Error("Completed matches require a winner at 21 and loser below 21");
+ const limit=Number(snapshot.events.find(t=>t.id===match.eventId)?.roundLimit||0);
+ if(limit?!(Number.isInteger(a)&&Number.isInteger(b)&&a>=0&&b>=0&&a<=21&&b<=21&&a!==b):!validScore(a,b))throw Error(limit?"Round-capped results require two valid non-tied scores":"Completed matches require a winner at 21 and loser below 21");
  if(match.a==null||match.b==null)throw Error("Both teams must be assigned before entering results");
  const oldWinner=match.status==="Final"?teamKey(winner(match)):null;
  const nextWinner=teamKey(a>b?match.a:match.b);
@@ -102,7 +103,7 @@ function applyRound(snapshot,match,command){
  }
  const row={...old,...values,...(doubles?{throwerA:Number(throwerA),throwerB:Number(throwerB)}:{})};
  const edited=existing.map((r,i)=>i===index?row:r);
- const sc=scorecard(edited,match.a,match.b);
+ const sc=scorecard(edited,match.a,match.b,{maxRounds:Number(snapshot.events.find(t=>t.id===match.eventId)?.roundLimit||0)});
  if(sc.history.length!==edited.length)throw Error("This correction would finish the game before later recorded rounds. Reopen and reconcile the later rounds first");
  const wasFinal=match.status==="Final";
  if(wasFinal&&!sc.finished)throw Error("Corrected rounds no longer reach 21. Reopen the match to revise its full record");

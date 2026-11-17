@@ -41,3 +41,26 @@ Updated 2026-11-17. Keep this file aligned with each feature PR and its tests.
 - [Director Corrections and Bracket Scheduling](DIRECTOR_CORRECTIONS_AND_SCHEDULING.md)
 
 Current deployment is a demo. Every user account and score inside the GitHub Pages app is browser-local, and director demo mode is **not** secure authentication. Do not trust the app as the sole system of record for real events.
+
+
+## 2026-11-17: Director tournament formats and operations epic
+### Implemented in browser-local demo
+- [x] Freeze individual match or child tournament from new board assignments
+- [x] Board flex between child brackets, with safe transfer of running scored game to free board
+- [x] Tournament Studio: signups, team building, stage-based launch, entry paid indicators
+- [x] Event/day-scoped door fees and director-marked paid status
+- [x] Singles, fixed-team doubles, blind draw doubles, singles/doubles swap formats
+- [x] Configurable rounders, PPR standings and top/bottom, top/middle, randomized pairing strategies
+- [x] Solo Slot and seeded byes for odd/even, non-power-of-two fields
+- [x] Random, director-entered points, state/national rankings, and rounder-PPR seed options
+- [x] Round-limited matches with scored overtime to break ties
+
+### Remaining
+- [ ] Shared persistent transactional backend, authenticated director/board permissions and multi-device sync
+- [ ] Verified league points / rankings imports and real payment flows
+- [ ] Audited roster removals/substitutions and fee history / refunds
+- [ ] Supervised bracket rebuild, director overrides, rest windows, and load testing
+- [ ] Multi-day check-in workflows and reliable tournament-day financial exports
+- [ ] Full venue integration tests with 6–12 tablets and concurrent divisions
+
+See [Director Tournament Epic](DIRECTOR_TOURNAMENT_EPIC.md).
