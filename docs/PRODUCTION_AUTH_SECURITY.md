@@ -86,3 +86,9 @@ Until the real backend is connected and these tests pass, nationwide operations 
 Public spectator traffic must be separated from protected scoring and member data. Serve public result snapshots through a cacheable read model, and restrict director/board operations to authenticated, transactional commands. Even at 5,000 concurrent visitors, **not** every page needs a websocket; direct Realtime fanout to that many clients has independent message/second limitations. Public CDN caches must never contain email, private profiles, membership, fees, payments, tokens or drafts. See [Spectator-First Nationwide Architecture](SPECTATOR_SCALING_ARCHITECTURE.md).
 
 Production performance targets require both distributed (5,000 viewers across many events) and concentrated (5,000 viewers watching one event) load tests, with simulated scoring bursts, reconnection, offline venue and privacy/RLS checks. These are future acceptance tests, not achieved capacity.
+
+
+## Pilot test automation and staging isolation
+The scheduled/manual [Pilot Readiness Checks](../.github/workflows/pilot-readiness.yml) workflow runs local regression tests and an optional read-only staging Auth/RLS smoke suite (script: scripts/staging-smoke.mjs). The staging test must be configured with project-specific URL/reference and protected secrets in the **staging** GitHub Environment, with repository variable UCL_STAGING_READY=true. It verifies dedicated player login, user token, profile visibility and backend access RPC, and optionally a director test account and hidden-profile fixture. It does not connect to production or submit live scores.
+
+Never use production users/passwords or elevated Supabase service keys for this runner. Event, match and scoring APIs have not yet been implemented; their cross-device and concurrency tests remain required before a credible private pilot. See [Private Pilot & Organization Demo Readiness](PILOT_DEMO_READINESS.md).

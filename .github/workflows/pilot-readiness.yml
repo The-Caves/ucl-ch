@@ -1,0 +1,54 @@
+name: UCL Pilot Readiness Checks
+
+on:
+  workflow_dispatch:
+  schedule:
+    # 06:15 Eastern Standard Time / 07:15 Eastern Daylight Time
+    - cron: '15 11 * * *'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ucl-pilot-readiness
+  cancel-in-progress: false
+
+jobs:
+  prototype-regression:
+    name: Bracket and scoring regressions
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate staging smoke runner syntax
+        run: node --check scripts/staging-smoke.mjs
+      - name: Existing unit and integration tests (local prototype)
+        run: npm test
+
+  staging-account-smoke:
+    name: Staging Auth and RLS read-only smoke
+    needs: prototype-regression
+    # Do not use staging secrets in pull-request jobs.
+    if: ${{ vars.UCL_STAGING_READY == 'true' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment: staging
+    env:
+      UCL_STAGING_URL: ${{ secrets.UCL_STAGING_URL }}
+      UCL_STAGING_PROJECT_REF: ${{ secrets.UCL_STAGING_PROJECT_REF }}
+      UCL_STAGING_PRIVATE_PROFILE_ID: ${{ secrets.UCL_STAGING_PRIVATE_PROFILE_ID }}
+      UCL_STAGING_PUBLISHABLE_KEY: ${{ secrets.UCL_STAGING_PUBLISHABLE_KEY }}
+      UCL_STAGING_PLAYER_EMAIL: ${{ secrets.UCL_STAGING_PLAYER_EMAIL }}
+      UCL_STAGING_PLAYER_PASSWORD: ${{ secrets.UCL_STAGING_PLAYER_PASSWORD }}
+      UCL_STAGING_DIRECTOR_EMAIL: ${{ secrets.UCL_STAGING_DIRECTOR_EMAIL }}
+      UCL_STAGING_DIRECTOR_PASSWORD: ${{ secrets.UCL_STAGING_DIRECTOR_PASSWORD }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Test live staging account service and read-only RLS
+        run: node scripts/staging-smoke.mjs

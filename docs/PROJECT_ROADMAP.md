@@ -106,3 +106,18 @@ Our goal is a **public sports scoreboard and player-tracking platform**, not dir
 - [ ] Add notification/follow opt-in, privacy controls, and replay/history after public browsing and score delivery are proven
 
 Supabase Pro spending-capped Realtime (500 sockets / 500 messages per second) is **not** a viable architecture for 5,000 direct live sockets. Pro with spend cap off documents 10,000 sockets / 2,500 messages per second, still requiring careful fanout capacity. See [Spectator-First Nationwide Architecture](SPECTATOR_SCALING_ARCHITECTURE.md) for contracts, failure modes, and acceptance criteria. **Not implemented or load-tested.**
+
+
+## Immediate priority: database-backed private pilot and organization presentation (2026-11-17)
+**The critical path is shared persistence PLUS trusted scoring APIs**, not just a hosted database.
+- [x] Stage Supabase Auth/profile/organization schema and local account service scaffold (not deployed).
+- [x] Prepare automated GitHub Actions pilot-readiness agent: daily/manual regression suite, with opt-in read-only staging Auth/RLS smoke after database provisioning.
+- [ ] Create UCL-owned staging Supabase project, review/apply migration, configure test accounts, protect GitHub Environment secrets, enable staging check.
+- [ ] Implement event/tournament/match/board/round database schema with tenant-isolated RLS and seed reset for a fictional organization.
+- [ ] Trusted idempotent match-round submission and automatic bracket advancement in one transaction.
+- [ ] Replace browser-local director and tablet writes with shared server APIs; enable private board/device realtime and public spectator snapshots.
+- [ ] E2E two-browser/two-device tests (director, tablet, anonymous spectator) and isolated scoring concurrency tests, with audit and offline recovery.
+- [ ] Deliver a rehearsed **10–15 minute organization demo**: Today/Live, player search, multi-bracket event hub, board tablet scores, PPR, director correction, role boundaries.
+- [ ] Conduct venue pilot and 5k-viewer load tests as separate later release gates; never claim public capacity based on demo.
+
+**Current gate:** no database is connected and the new staging smoke cannot run until Supabase credentials/fixtures are provisioned. The scheduler does not provision Supabase, access production data, or autonomously repair failures. Details: [Private Pilot & Organization Demo Readiness](PILOT_DEMO_READINESS.md).
