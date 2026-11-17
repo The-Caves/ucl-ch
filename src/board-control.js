@@ -2,6 +2,7 @@ import {numberedMatches,recordResult} from "./engine.js";
 import {roundPoints,scorecard} from "./scorecard.js";
 import {includesPlayer} from "./player-statistics.js";
 import {childTournaments} from "./event-hierarchy.js";
+import {scheduleCandidates} from "./scheduling-policy.js";
 
 // Browser-local simulation only. The production backend must own these mutations.
 export const BOARD_FLOOR_VERSION=1;
@@ -38,9 +39,8 @@ const sameId=(a,b)=>String(a)===String(b);
 const playersOnTeam=team=>Array.isArray(team)?team.map(String):team==null?[]:[String(team)];
 export function availableMatches(state,parentId){
  const childIds=new Set(childTournaments(state,parentId).map(t=>t.id));
- const busy=new Set(state.matches.filter(m=>m.status==="In Progress").flatMap(m=>[...playersOnTeam(m.a),...playersOnTeam(m.b)]));
- return numberedMatches(state.matches.filter(m=>childIds.has(m.eventId))).filter(m=>m.status==="Scheduled"&&m.a!=null&&m.b!=null&&[...playersOnTeam(m.a),...playersOnTeam(m.b)].every(id=>!busy.has(id)))
- .sort((a,b)=>a.round-b.round||a.matchNumber-b.matchNumber);
+ // Evaluate against ALL active matches: players can participate in multiple child brackets.
+ return scheduleCandidates(state.matches,childIds).ready;
 }
 export function assignMatchToBoard(state,stationId,matchId){
  const station=state.boardStations?.find(s=>s.id===stationId);
