@@ -79,3 +79,6 @@ Phase 5: venue pilot with 6–12 tablets, at least three concurrent tournaments,
 
 ## Explicit current limitations
 The pilot currently stores data in browser localStorage. Browser storage event listeners can sync tabs in the same origin/browser profile, not different laptops/tablets. There is no secure device pairing and no shared backend. It must NOT be relied on as sole scorekeeping for a real event.
+
+## Identity, infrastructure and role foundation (not deployed)
+The first staged migration for Supabase Auth, profiles, organization membership, platform admins, authorization audit and restrictive RLS is documented in [Production Infrastructure, Accounts & Security](PRODUCTION_AUTH_SECURITY.md). It does not yet provide event-scoped scoring permissions or replace the existing local demo UI. Build the trusted event + score command APIs and verify RLS in staging before running a venue.
