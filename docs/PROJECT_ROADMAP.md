@@ -90,3 +90,19 @@ See [Production Infrastructure, Accounts & Security](PRODUCTION_AUTH_SECURITY.md
 - [ ] Validate multi-tenant security under concurrency, schema growth, backups and tested disaster recovery before claiming nationwide readiness.
 
 The proposed infrastructure can serve geographically distributed US users, but these scale tests and the backend are NOT implemented. Sources: https://supabase.com/docs/guides/realtime/limits and https://developers.cloudflare.com/pages/platform/limits/.
+
+## Spectator-first nationwide live scoring (new primary product track, 2026-11-17)
+Our goal is a **public sports scoreboard and player-tracking platform**, not director-only software. A spectator may visit without a login from a venue or from home.
+
+- [ ] Public Today / Live nationwide directory: state, city, date, live status, event format and venue filters; shareable URLs
+- [ ] Public event hub with every child tournament, currently playing games, all scores, upcoming matches, final results and standings
+- [ ] Player lookup that identifies active event/bracket, board, opponent, confirmed score, live PPR and recent match history
+- [ ] Public read-model tables/indexes with paginated search, bounded responses and trusted score-version snapshots
+- [ ] CDN caching for public read-only listings and score snapshots; never cache privileged or payment data
+- [ ] Selective live updates in foreground views, clear freshness/offline indicators, no raw Postgres Changes fanout to every viewer
+- [ ] Separate trustworthy scoring writes and director/board Realtime traffic from high-volume public spectators
+- [ ] Load-test 500, 2,000 and **5,000 simultaneous spectators distributed across events**, plus **5,000 concentrated** on one popular event
+- [ ] Measure origin RPS, cache hit ratio, p95/p99 latency, Realtime messages/sec, round-to-screen delay, mobile performance, costs and resilience
+- [ ] Add notification/follow opt-in, privacy controls, and replay/history after public browsing and score delivery are proven
+
+Supabase Pro spending-capped Realtime (500 sockets / 500 messages per second) is **not** a viable architecture for 5,000 direct live sockets. Pro with spend cap off documents 10,000 sockets / 2,500 messages per second, still requiring careful fanout capacity. See [Spectator-First Nationwide Architecture](SPECTATOR_SCALING_ARCHITECTURE.md) for contracts, failure modes, and acceptance criteria. **Not implemented or load-tested.**

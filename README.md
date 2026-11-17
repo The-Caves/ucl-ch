@@ -48,6 +48,9 @@ A **staged** Supabase Auth/PostgreSQL migration and account service are included
 
 **Not live:** the current GitHub Pages app deliberately still uses fictional local demo accounts and a demo director toggle; real accounts are not registered or connected to production infrastructure. No Supabase project, credentials, migrations or account email service have been deployed yet. Real sign-in must not be enabled until the event data, scoring and permission checks have been moved to authenticated server APIs.
 
+## Nationwide live spectator experience (planned)
+UCL is intended to be a **public live cornhole scoreboard for spectators nationwide**, not just a director app. The production roadmap includes Today / Live discovery, searchable player-to-current-match tracking, event-wide scores, shareable deep links, public read-only snapshots through a CDN, and selective low-latency updates for active spectators. We will test **5,000 concurrent spectators across many events and 5,000 watching one event** separately. Those tests and the scalable public APIs are **not yet implemented**. See [Spectator-First Nationwide Architecture](docs/SPECTATOR_SCALING_ARCHITECTURE.md) and [Project Roadmap](docs/PROJECT_ROADMAP.md).
+
 ## Development
 Run `npm test` to validate the engine, scorecards, historical fixtures and player statistics. GitHub Actions runs tests on pull requests and before Pages publication.
 
