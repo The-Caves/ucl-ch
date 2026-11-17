@@ -64,3 +64,18 @@ Current deployment is a demo. Every user account and score inside the GitHub Pag
 - [ ] Full venue integration tests with 6–12 tablets and concurrent divisions
 
 See [Director Tournament Epic](DIRECTOR_TOURNAMENT_EPIC.md).
+
+## Production accounts and infrastructure — foundation drafted, not deployed (2026-11-17)
+- [x] Auth/profiles organization-membership schema + private platform admin table + authorization audit baseline in migration
+- [x] RLS and least-privilege profile reads/updates; no client role mutation policies
+- [x] Supabase v2 account service scaffold: signup, sign-in, sign-out, reset, profile edits, server-derived access
+- [x] Mocked unit tests and static schema security checks
+- [ ] Provision staging and production Supabase projects with email delivery and MFA for privileged roles
+- [ ] Apply migrations and validate RLS using real JWT roles/SQL integration tests against staging
+- [ ] Bootstrap verified founder/admin account from trusted operator console; no public admin signup
+- [ ] Build and deploy a production frontend with verified auth flows, email confirmation and account recovery
+- [ ] Replace demo localStorage event and score mutations with server-authorized APIs and event/organization access control
+- [ ] Secure tablet pairing, server-side scoring transactions, private realtime subscriptions and tested offline recovery
+- [ ] Penetration review, security headers, audit retention, backup restore drills and production pilot approval
+
+See [Production Infrastructure, Accounts & Security](PRODUCTION_AUTH_SECURITY.md). Do not treat the current demo login/director toggle as a production security boundary.

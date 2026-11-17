@@ -43,6 +43,11 @@ Director Tools now includes a Tournament Studio for singles, fixed-team doubles,
 
 Board Command Center can freeze/unfreeze individual matches or child tournaments from new board assignments. Flex Board reassigns eligible games between boards and brackets in the same event; already-scored games may be transferred to a free board without discarding their scorecards. A configured round limit ends at the first non-tied final when the cap is reached, with a recorded sudden-death extra round when tied. These are **browser-local prototype features only**, not authenticated multi-device tools or actual payment collection. Full conditions and release requirements: [Director Tournament Epic](docs/DIRECTOR_TOURNAMENT_EPIC.md) and [Project Roadmap](docs/PROJECT_ROADMAP.md).
 
+## Production user accounts and secure infrastructure foundation
+A **staged** Supabase Auth/PostgreSQL migration and account service are included for real player signup, login, password reset, self-managed profiles, organization-scoped director/scorekeeper access and private, operator-provisioned platform admins. The database schema enables RLS, restricts profile edits and prevents browser-side role promotion. See [Production Infrastructure, Accounts & Security](docs/PRODUCTION_AUTH_SECURITY.md).
+
+**Not live:** the current GitHub Pages app deliberately still uses fictional local demo accounts and a demo director toggle; real accounts are not registered or connected to production infrastructure. No Supabase project, credentials, migrations or account email service have been deployed yet. Real sign-in must not be enabled until the event data, scoring and permission checks have been moved to authenticated server APIs.
+
 ## Development
 Run `npm test` to validate the engine, scorecards, historical fixtures and player statistics. GitHub Actions runs tests on pull requests and before Pages publication.
 
