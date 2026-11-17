@@ -52,6 +52,13 @@ Show assigned match and big names/scores; one-touch four-bag in/on controls; nam
 ## Disconnected scoring
 Store unsent round drafts locally with stable request IDs. Do not publish or advance a bracket without server acknowledgment. On reconnect fetch current match assignment and version before replay. Assignment changes and conflicting rounds require director review, not silent overwrite.
 
+## Director correction milestone (browser-local)
+Director tools include manual completed match entry, forfeits, wrong-winner/score correction, recorded-round and doubles thrower edits, opening matchup swaps and explicit reopen. Each action records an actor, reason and before/after snapshots in a **local** audit. Result changes only recalculate downstream matches not yet started. Once a dependent match is active/final, the system rejects the edit pending supervised replay. See [Director Corrections & Scheduling](DIRECTOR_CORRECTIONS_AND_SCHEDULING.md).
+
+The scheduling policy prioritizes interleaved winners/losers waves; upper round R >= 3 waits for losers round 2R-4. The 4–128 double-elimination generator is exercised with automated complete-bracket simulations. Director Board Command displays queue holds.
+
+**Production gap:** local corrections are not authenticated and cannot serve as a legally or competitively reliable record. Backend authorizations, immutable transaction logs, director approval, conflict recovery and cross-device publication are required.
+
 ## Rollout
 Phase 1 (implemented): local board floor, round scoring, auto final/advance, immediate local PPR, browser-tab sync, unit and smoke tests.
 Phase 2: server schema, Auth, RLS, scoring transaction, live subscriptions and durable server records.

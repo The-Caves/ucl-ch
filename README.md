@@ -31,6 +31,13 @@ The Director Tools page now links to a **Board Command Center**. Boards are shar
 
 **Important:** This is browser-local demonstration functionality with same-browser tab storage synchronization, **not actual cross-device scoring**. The backend pairing, real-time subscriptions and transactional writes needed for a live event are specified in [Live Board Scoring Architecture](docs/LIVE_SCORING_ARCHITECTURE.md). Do not use the pilot as sole scorekeeping at a real venue.
 
+## Audited director corrections and balanced brackets
+Directors in demo mode can enter manual results and forfeits, correct an incorrect winner or score, fix saved round bag data and doubles thrower attribution, correct unplayed opening matchups, swap competitors between opening matches, and reopen matches. Corrections require a reason, preserve a local before/after audit snapshot, and update only unplayed downstream results. Changes that would invalidate an active/final dependent match are blocked pending a supervised rebuild.
+
+The shared board scheduler now interleaves upper and lower bracket waves, with an explicit losers catch-up gate: upper round 3 waits for lower round 2, upper round 4 for lower round 4, etc. Fully simulated brackets work for 4, 8, 16, 32, 64 and 128 participants. Director Board Command shows ready games and held upper games. **These features remain browser-local demonstrations; edits and audits are not trusted across devices.**
+
+See the [Director Corrections & Scheduling Guide](docs/DIRECTOR_CORRECTIONS_AND_SCHEDULING.md) and the [Project Roadmap](docs/PROJECT_ROADMAP.md) for acceptance criteria and outstanding production tasks.
+
 ## Development
 Run `npm test` to validate the engine, scorecards, historical fixtures and player statistics. GitHub Actions runs tests on pull requests and before Pages publication.
 

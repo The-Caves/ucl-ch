@@ -1,6 +1,7 @@
+import {scheduleCandidates} from "./scheduling-policy.js";
 // Tournament graph: explicit winner/loser routing, no guessed loser destinations.
-export function makeBracket(ids,eventId){if(ids.length<2||ids.length>32)throw Error("2–32 players required");const size=2**Math.ceil(Math.log2(ids.length));const rounds=Math.log2(size),rows=[];for(let r=1;r<=rounds;r++)for(let i=0;i<size/2**r;i++)rows.push({id:eventId+"-W"+r+"-"+i,eventId,side:"W",round:r,slot:i,a:r===1?ids[2*i]??null:null,b:r===1?ids[2*i+1]??null:null,sourceA:r>1?{id:eventId+"-W"+(r-1)+"-"+(2*i),outcome:"winner"}:null,sourceB:r>1?{id:eventId+"-W"+(r-1)+"-"+(2*i+1),outcome:"winner"}:null,status:"Scheduled",scoreA:0,scoreB:0,court:i+1});return rows}
-export function makeDoubleElimination(ids,eventId){if(![4,8,16,32].includes(ids.length))throw Error("Double elimination currently requires 4, 8, 16 or 32 participants");const n=ids.length,k=Math.log2(n),rows=[];const match=(side,round,slot,sourceA=null,sourceB=null,a=null,b=null)=>({id:eventId+"-"+side+round+"-"+slot,eventId,side,round,slot,sourceA,sourceB,a,b,status:"Scheduled",scoreA:0,scoreB:0,court:null});const ref=(side,r,i,outcome="winner")=>({id:eventId+"-"+side+r+"-"+i,outcome});
+export function makeBracket(ids,eventId){if(ids.length<2||ids.length>128)throw Error("2–128 players required");const size=2**Math.ceil(Math.log2(ids.length));const rounds=Math.log2(size),rows=[];for(let r=1;r<=rounds;r++)for(let i=0;i<size/2**r;i++)rows.push({id:eventId+"-W"+r+"-"+i,eventId,side:"W",round:r,slot:i,a:r===1?ids[2*i]??null:null,b:r===1?ids[2*i+1]??null:null,sourceA:r>1?{id:eventId+"-W"+(r-1)+"-"+(2*i),outcome:"winner"}:null,sourceB:r>1?{id:eventId+"-W"+(r-1)+"-"+(2*i+1),outcome:"winner"}:null,status:"Scheduled",scoreA:0,scoreB:0,court:i+1});return rows}
+export function makeDoubleElimination(ids,eventId){if(![4,8,16,32,64,128].includes(ids.length))throw Error("Double elimination requires 4, 8, 16, 32, 64 or 128 competitors");const n=ids.length,k=Math.log2(n),rows=[];const match=(side,round,slot,sourceA=null,sourceB=null,a=null,b=null)=>({id:eventId+"-"+side+round+"-"+slot,eventId,side,round,slot,sourceA,sourceB,a,b,status:"Scheduled",scoreA:0,scoreB:0,court:null});const ref=(side,r,i,outcome="winner")=>({id:eventId+"-"+side+r+"-"+i,outcome});
 for(let r=1;r<=k;r++)for(let i=0;i<n/2**r;i++)rows.push(match("W",r,i,r>1?ref("W",r-1,2*i):null,r>1?ref("W",r-1,2*i+1):null,r===1?ids[2*i]:null,r===1?ids[2*i+1]:null));
 for(let j=1;j<=2*k-2;j++){const count=n/2**(Math.floor((j+1)/2)+1);for(let i=0;i<count;i++){let a,b;if(j===1){a=ref("W",1,2*i,"loser");b=ref("W",1,2*i+1,"loser")}else if(j%2===0){a=ref("L",j-1,i);b=ref("W",j/2+1,i,"loser")}else{a=ref("L",j-1,2*i);b=ref("L",j-1,2*i+1)}rows.push(match("L",j,i,a,b))}}
 rows.push(match("F",1,0,ref("W",k,0),ref("L",2*k-2,0)));
@@ -27,10 +28,9 @@ export function matchOrder(matches){
 export function numberedMatches(matches){const byEvent=new Map();return matches.map(m=>{if(!byEvent.has(m.eventId)){const own=matches.filter(x=>x.eventId===m.eventId),map=new Map(matchOrder(own).map((x,i)=>[x.id,i+1]));byEvent.set(m.eventId,map)}return {...m,matchNumber:byEvent.get(m.eventId).get(m.id)}})}
 export function schedulingQueue(matches){
  const numbered=numberedMatches(matches);
- const occupied=new Set(numbered.filter(m=>m.status==="In Progress").flatMap(m=>[m.a,m.b]).filter(Boolean));
- const ready=numbered.filter(m=>m.status==="Scheduled"&&m.a!=null&&m.b!=null&&!occupied.has(m.a)&&!occupied.has(m.b));
- const active=numbered.filter(m=>m.status==="In Progress");
- return {active:active.sort((a,b)=>a.matchNumber-b.matchNumber),ready:ready.sort((a,b)=>a.matchNumber-b.matchNumber)};
+ const scope=new Set(numbered.map(m=>m.eventId));
+ const candidates=scheduleCandidates(numbered,scope);
+ return {active:candidates.active,ready:candidates.ready,held:candidates.held};
 }
 export function assignNextBoard(matches,board){
  if(!Number.isInteger(Number(board))||Number(board)<1)throw Error("Invalid board");
