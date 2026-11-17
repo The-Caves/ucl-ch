@@ -26,6 +26,11 @@ A hosted parent **Event** has zero or more child **Tournaments**. Child tourname
 
 These remain **fictional browser-local demonstration data**, not a live multiuser competition service. Production should use server-assigned event IDs, director permissions, audited match updates, and shared player-follow relationships.
 
+## Director board scoring pilot
+The Director Tools page now links to a **Board Command Center**. Boards are shared by all tournaments in the parent event; the director can add boards, assign the next ready match, release an unscored assignment, and open a large tablet-style scoring view. Players save in/on bag totals for each side every round (with thrower attribution for doubles). Cancellation scores and bag metrics update immediately; a match reaching 21 advances the existing bracket and frees the board. Optimistic round-number checks prevent duplicate saves in the local pilot. Live round statistics update before match final, while wins, losses and CSR only change when the result is final.
+
+**Important:** This is browser-local demonstration functionality with same-browser tab storage synchronization, **not actual cross-device scoring**. The backend pairing, real-time subscriptions and transactional writes needed for a live event are specified in [Live Board Scoring Architecture](docs/LIVE_SCORING_ARCHITECTURE.md). Do not use the pilot as sole scorekeeping at a real venue.
+
 ## Development
 Run `npm test` to validate the engine, scorecards, historical fixtures and player statistics. GitHub Actions runs tests on pull requests and before Pages publication.
 

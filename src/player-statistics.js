@@ -17,7 +17,8 @@ export function roundSide(row,id){
 }
 export function playerStats(matches,scorecards,id){
  const finals=matches.filter(m=>m.status==="Final"&&participated(m,id));
- const matchIds=new Set(finals.map(m=>m.id));
+ // Round-level PPR updates during play; W/L and CSR update only after a final result.
+ const matchIds=new Set(matches.filter(m=>["Final","In Progress"].includes(m.status)&&participated(m,id)).map(m=>m.id));
  const rows=scorecards.filter(r=>matchIds.has(r.matchId)).map(r=>({r,side:roundSide(r,id)})).filter(x=>x.side);
  const wins=finals.filter(m=>includesPlayer(m.scoreA>m.scoreB?m.a:m.b,id)).length;
  let points=0,opponent=0,fours=0;
