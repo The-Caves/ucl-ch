@@ -40,7 +40,7 @@ const playersOnTeam=team=>Array.isArray(team)?team.map(String):team==null?[]:[St
 export function availableMatches(state,parentId){
  const childIds=new Set(childTournaments(state,parentId).map(t=>t.id));
  // Evaluate against ALL active matches: players can participate in multiple child brackets.
- return scheduleCandidates(state.matches,childIds).ready;
+ return scheduleCandidates(state.matches,childIds).ready.filter(m=>!m.frozen&&!state.events.find(t=>t.id===m.eventId)?.frozen);
 }
 export function assignMatchToBoard(state,stationId,matchId){
  const station=state.boardStations?.find(s=>s.id===stationId);
@@ -80,12 +80,13 @@ export function submitStationRound(state,{stationId,matchId,expectedRound,aIn,aO
  if(!Number.isInteger(Number(expectedRound))||Number(expectedRound)!==rows.length)throw Error("Round changed on another device. Reload the scoreboard before submitting");
  roundPoints(aIn,aOn);roundPoints(bIn,bOn);
  const doubles=Array.isArray(match.a)||Array.isArray(match.b);
- if(doubles&&(!includesPlayer(match.a,throwerA)||!includesPlayer(match.b,throwerB)))throw Error("Select the actual thrower from each doubles team");
+ if(doubles&&(Number(throwerA)<=0||Number(throwerB)<=0||!includesPlayer(match.a,throwerA)||!includesPlayer(match.b,throwerB)))throw Error("Select the actual thrower from each doubles team");
  const row={id:matchId+"-boardround-"+(rows.length+1),matchId,a:match.a,b:match.b,
    aIn:Number(aIn),aOn:Number(aOn),bIn:Number(bIn),bOn:Number(bOn),
    ...(doubles?{throwerA:Number(throwerA),throwerB:Number(throwerB)}:{}),roundIndex:rows.length+1,timestamp:new Date().toISOString(),source:"board-demo"};
- const summary=scorecard([...rows,row],match.a,match.b);
- if(rows.length&&scorecard(rows,match.a,match.b).finished)throw Error("Match has already finished");
+ const maxRounds=Number(state.events.find(t=>t.id===match.eventId)?.roundLimit||0);
+ const summary=scorecard([...rows,row],match.a,match.b,{maxRounds});
+ if(rows.length&&scorecard(rows,match.a,match.b,{maxRounds}).finished)throw Error("Match has already finished");
  state.scorecards.push(row);
  let completed=false;
  if(summary.finished){

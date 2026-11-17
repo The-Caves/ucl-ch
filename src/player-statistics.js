@@ -37,7 +37,7 @@ export function doublesRatings(players,matches){
  const map=new Map(players.map(p=>[p.id,{id:p.id,rating:1500,games:0,wins:0}]));
  for(const m of matches){
   if(m.status!=="Final"||!Array.isArray(m.a)||!Array.isArray(m.b))continue;
-  const teamA=m.a.map(id=>map.get(Number(id))),teamB=m.b.map(id=>map.get(Number(id)));
+  const teamA=m.a.filter(id=>Number(id)>0).map(id=>map.get(Number(id))),teamB=m.b.filter(id=>Number(id)>0).map(id=>map.get(Number(id)));
   if(teamA.some(x=>!x)||teamB.some(x=>!x))continue;
   const avg=team=>team.reduce((n,p)=>n+p.rating,0)/team.length;
   const expected=1/(1+10**((avg(teamB)-avg(teamA))/400));

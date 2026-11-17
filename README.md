@@ -38,11 +38,16 @@ The shared board scheduler now interleaves upper and lower bracket waves, with a
 
 See the [Director Corrections & Scheduling Guide](docs/DIRECTOR_CORRECTIONS_AND_SCHEDULING.md) and the [Project Roadmap](docs/PROJECT_ROADMAP.md) for acceptance criteria and outstanding production tasks.
 
+## Tournament Studio: formats, registration and board flexibility
+Director Tools now includes a Tournament Studio for singles, fixed-team doubles, blind-draw doubles, and singles/doubles swap rounders. Directors can choose single or double elimination, set a round cap, choose random or director-entered ranking/points seedings, build set teams, register demo players, and track child-tournament entry and parent event/day door fee indicators. Swap tournaments can progress from scored rounders to PPR-ordered playoff pairings (top/bottom, top/middle, randomized top/bottom, or blind draw). Odd doubles fields use an unranked Solo Slot, and seeded byes auto-advance without invented results.
+
+Board Command Center can freeze/unfreeze individual matches or child tournaments from new board assignments. Flex Board reassigns eligible games between boards and brackets in the same event; already-scored games may be transferred to a free board without discarding their scorecards. A configured round limit ends at the first non-tied final when the cap is reached, with a recorded sudden-death extra round when tied. These are **browser-local prototype features only**, not authenticated multi-device tools or actual payment collection. Full conditions and release requirements: [Director Tournament Epic](docs/DIRECTOR_TOURNAMENT_EPIC.md) and [Project Roadmap](docs/PROJECT_ROADMAP.md).
+
 ## Development
 Run `npm test` to validate the engine, scorecards, historical fixtures and player statistics. GitHub Actions runs tests on pull requests and before Pages publication.
 
 ## Limitations
-All sample people, events and scores are fictional. This is a single-browser demonstration, not a real multiuser tournament backend. No official league feed, account system, realtime synchronization, secure director authentication, full double-elimination bracket, payments or native store apps. A production implementation needs a verified score/audit pipeline and permissioned server.
+All sample people, events and scores are fictional. This is a single-browser demonstration, not a real multiuser tournament backend. No official league feed, account system, realtime synchronization, secure director authentication, production-certified bracket engine, real payments or native store apps. A production implementation needs a verified score/audit pipeline and permissioned server.
 
 ## Branding
 Edit `src/brand.js` for naming and `index.html` theme variables for colors. Licensed artwork can replace placeholder assets after permission is obtained.

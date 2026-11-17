@@ -1,18 +1,38 @@
 import {scheduleCandidates} from "./scheduling-policy.js";
 // Tournament graph: explicit winner/loser routing, no guessed loser destinations.
-export function makeBracket(ids,eventId){if(ids.length<2||ids.length>128)throw Error("2–128 players required");const size=2**Math.ceil(Math.log2(ids.length));const rounds=Math.log2(size),rows=[];for(let r=1;r<=rounds;r++)for(let i=0;i<size/2**r;i++)rows.push({id:eventId+"-W"+r+"-"+i,eventId,side:"W",round:r,slot:i,a:r===1?ids[2*i]??null:null,b:r===1?ids[2*i+1]??null:null,sourceA:r>1?{id:eventId+"-W"+(r-1)+"-"+(2*i),outcome:"winner"}:null,sourceB:r>1?{id:eventId+"-W"+(r-1)+"-"+(2*i+1),outcome:"winner"}:null,status:"Scheduled",scoreA:0,scoreB:0,court:i+1});return rows}
-export function makeDoubleElimination(ids,eventId){if(![4,8,16,32,64,128].includes(ids.length))throw Error("Double elimination requires 4, 8, 16, 32, 64 or 128 competitors");const n=ids.length,k=Math.log2(n),rows=[];const match=(side,round,slot,sourceA=null,sourceB=null,a=null,b=null)=>({id:eventId+"-"+side+round+"-"+slot,eventId,side,round,slot,sourceA,sourceB,a,b,status:"Scheduled",scoreA:0,scoreB:0,court:null});const ref=(side,r,i,outcome="winner")=>({id:eventId+"-"+side+r+"-"+i,outcome});
+export function makeBracket(ids,eventId){if(ids.length<2||ids.length>128)throw Error("2–128 players required");const size=2**Math.ceil(Math.log2(ids.length));const rounds=Math.log2(size),rows=[];for(let r=1;r<=rounds;r++)for(let i=0;i<size/2**r;i++)rows.push({id:eventId+"-W"+r+"-"+i,eventId,side:"W",round:r,slot:i,a:r===1?ids[2*i]??null:null,b:r===1?ids[2*i+1]??null:null,sourceA:r>1?{id:eventId+"-W"+(r-1)+"-"+(2*i),outcome:"winner"}:null,sourceB:r>1?{id:eventId+"-W"+(r-1)+"-"+(2*i+1),outcome:"winner"}:null,status:"Scheduled",scoreA:0,scoreB:0,court:i+1});return resolveByes(rows)}
+export function makeDoubleElimination(ids,eventId){if(ids.length<3||ids.length>128)throw Error("Double elimination requires 3–128 competitors");const n=2**Math.ceil(Math.log2(Math.max(4,ids.length))),k=Math.log2(n),rows=[];const match=(side,round,slot,sourceA=null,sourceB=null,a=null,b=null)=>({id:eventId+"-"+side+round+"-"+slot,eventId,side,round,slot,sourceA,sourceB,a,b,status:"Scheduled",scoreA:0,scoreB:0,court:null});const ref=(side,r,i,outcome="winner")=>({id:eventId+"-"+side+r+"-"+i,outcome});
 for(let r=1;r<=k;r++)for(let i=0;i<n/2**r;i++)rows.push(match("W",r,i,r>1?ref("W",r-1,2*i):null,r>1?ref("W",r-1,2*i+1):null,r===1?ids[2*i]:null,r===1?ids[2*i+1]:null));
 for(let j=1;j<=2*k-2;j++){const count=n/2**(Math.floor((j+1)/2)+1);for(let i=0;i<count;i++){let a,b;if(j===1){a=ref("W",1,2*i,"loser");b=ref("W",1,2*i+1,"loser")}else if(j%2===0){a=ref("L",j-1,i);b=ref("W",j/2+1,i,"loser")}else{a=ref("L",j-1,2*i);b=ref("L",j-1,2*i+1)}rows.push(match("L",j,i,a,b))}}
 rows.push(match("F",1,0,ref("W",k,0),ref("L",2*k-2,0)));
-rows.push(match("F",2,0,ref("F",1,0,"loser"),ref("F",1,0,"winner")));return rows}
-export function winner(m){return m.status==="Final"?(m.scoreA>m.scoreB?m.a:m.b):null}
-export function loser(m){return m.status==="Final"?(m.scoreA>m.scoreB?m.b:m.a):null}
+rows.push(match("F",2,0,ref("F",1,0,"loser"),ref("F",1,0,"winner")));return resolveByes(rows)}
+// Byes advance players without fabricating a game or bag-level statistics.
+export function resolveByes(matches){
+ const rows=matches.map(m=>({...m})),byId=new Map(rows.map(m=>[m.id,m]));
+ for(let step=0;step<rows.length+2;step++){
+  let changed=false;
+  for(const m of rows){
+   if(m.status!=="Scheduled")continue;
+   const status=src=>!src||["Final","Bye","Not needed"].includes(byId.get(src.id)?.status);
+   if(!status(m.sourceA)||!status(m.sourceB))continue;
+   if(m.sourceA){const p=byId.get(m.sourceA.id);m.a=m.sourceA.outcome==="winner"?winner(p):loser(p)}
+   if(m.sourceB){const p=byId.get(m.sourceB.id);m.b=m.sourceB.outcome==="winner"?winner(p):loser(p)}
+   if(m.a!=null&&m.b!=null)continue;
+   m.status=m.a==null&&m.b==null?"Not needed":"Bye";
+   m.byeWinner=m.a??m.b??null;
+   changed=true;
+  }
+  if(!changed)break;
+ }
+ return rows;
+}
+export function winner(m){return m?.status==="Bye"?m.byeWinner:m?.status==="Final"?(m.tiebreakWinner??(m.scoreA>m.scoreB?m.a:m.b)):null}
+export function loser(m){return m?.status==="Final"?(winner(m)===m.a?m.b:m.a):null}
 export function nextMatch(matches,id,outcome){return matches.find(m=>m.status!=="Not needed"&&(m.sourceA?.id===id&&m.sourceA.outcome===outcome||m.sourceB?.id===id&&m.sourceB.outcome===outcome))||null}
-export function recordResult(matches,id,a,b){a=Number(a);b=Number(b);if(!Number.isInteger(a)||!Number.isInteger(b)||a<0||b<0||a===b)throw Error("Enter different nonnegative whole-number scores");const rows=matches.map(m=>({...m})),m=rows.find(x=>x.id===id);if(!m||!m.a||!m.b)throw Error("Both competitors must be assigned");if(m.status==="Final")throw Error("Result already final. Corrections require an audited director workflow.");if(m.side==="F"&&m.round===2){const first=rows.find(x=>x.eventId===m.eventId&&x.side==="F"&&x.round===1);if(!first||winner(first)!==first.b)throw Error("Reset final not required");}
-m.scoreA=a;m.scoreB=b;m.status="Final";for(const target of rows){for(const side of ["A","B"]){const src=target["source"+side];if(src?.id!==id)continue;target[side.toLowerCase()]=src.outcome==="winner"?winner(m):loser(m);}}
+export function recordResult(matches,id,a,b,options={}){a=Number(a);b=Number(b);const tieWinner=options.tiebreakWinner;if(!Number.isInteger(a)||!Number.isInteger(b)||a<0||b<0||(a===b&&!tieWinner))throw Error("Enter different nonnegative whole-number scores or a verified tiebreak winner");const rows=matches.map(m=>({...m})),m=rows.find(x=>x.id===id);if(!m||!m.a||!m.b)throw Error("Both competitors must be assigned");if(m.status==="Final")throw Error("Result already final. Corrections require an audited director workflow.");if(m.side==="F"&&m.round===2){const first=rows.find(x=>x.eventId===m.eventId&&x.side==="F"&&x.round===1);if(!first||winner(first)!==first.b)throw Error("Reset final not required");}
+if(tieWinner&&JSON.stringify(tieWinner)!==JSON.stringify(m.a)&&JSON.stringify(tieWinner)!==JSON.stringify(m.b))throw Error("Tiebreak winner must be a competing team");m.scoreA=a;m.scoreB=b;m.status="Final";if(tieWinner)m.tiebreakWinner=tieWinner;for(const target of rows){for(const side of ["A","B"]){const src=target["source"+side];if(src?.id!==id)continue;target[side.toLowerCase()]=src.outcome==="winner"?winner(m):loser(m);}}
 if(m.side==="F"&&m.round===1){const reset=rows.find(x=>x.eventId===m.eventId&&x.side==="F"&&x.round===2);if(reset&&winner(m)===m.a){reset.status="Not needed";reset.a=null;reset.b=null;}}
-return rows}
+return resolveByes(rows)}
 export function rating(players,matches){const map=Object.fromEntries(players.map(p=>[p.id,{id:p.id,rating:1500,games:0,wins:0}]));for(const m of matches.filter(x=>x.status==="Final"&&x.a&&x.b)){const a=map[m.a],b=map[m.b];if(!a||!b)continue;const expected=1/(1+10**((b.rating-a.rating)/400)),win=m.scoreA>m.scoreB?1:0,delta=32*(win-expected);a.rating+=delta;b.rating-=delta;a.games++;b.games++;a.wins+=win;b.wins+=1-win}return Object.values(map).map(x=>({...x,rating:Math.round(x.rating),provisional:x.games<8})).sort((a,b)=>b.rating-a.rating)}
 
 /* Stable tournament-wide match numbering and dependency-aware board queue. */
