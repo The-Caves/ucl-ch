@@ -19,6 +19,13 @@ Tournament discovery includes search, status chips, sorting, expandable date/cit
 ## Player discovery and CSR leaderboard
 The UCL brand title acts as a dashboard navigation button. The dashboard provides a Players & Leaderboard entry below My Tournaments and above Practice. Player search uses the eight fictional competition participants and includes any browser-local demo profiles as unranked entries. Singles and doubles CSR standings use existing tournament scoring/rating algorithms, with independent qualification thresholds and state/city filters. Geographic ranks are calculated within the filtered area, while name search does not renumber ranks. Public demo player pages include established CSR and recent simulated results. This remains a browser-local prototype, not a server-backed player database or verified real-world ranking.
 
+## Player Hub and multi-tournament event hierarchy
+The dashboard now links to a dedicated **Players** area with player search, following, and an embedded singles/doubles CSR leaderboard. Following is per demo account and stored only in the current browser. Player profiles include singles and doubles CSR, overall and state rank, match record, PPR, four-bagger percentage, recent matches, and active/upcoming/completed parent events. No backend or cross-device player account synchronization is claimed.
+
+A hosted parent **Event** has zero or more child **Tournaments**. Child tournaments keep their independent brackets, scores, stats and standings; opening any child bracket provides a link to event-wide scores. The parent event page shows every child bracket and expandable, searchable live/upcoming/final score groups. A versioned migration wraps existing tournaments in parent events without modifying their match IDs or results. The fictional Triangle Cornhole Night fixture demonstrates three simultaneous brackets; other legacy tournaments become one-bracket events. Director demo tools create a venue event separately and then add independent singles or doubles brackets beneath it. The bracket tab is full-width with a large scrollable canvas on desktop and mobile.
+
+These remain **fictional browser-local demonstration data**, not a live multiuser competition service. Production should use server-assigned event IDs, director permissions, audited match updates, and shared player-follow relationships.
+
 ## Development
 Run `npm test` to validate the engine, scorecards, historical fixtures and player statistics. GitHub Actions runs tests on pull requests and before Pages publication.
 
