@@ -54,6 +54,9 @@ UCL is intended to be a **public live cornhole scoreboard for spectators nationw
 ## Next milestone: real database + repeatable private pilot
 The next blocker is not merely a database subscription: UCL needs **shared persistent event data, authenticated transactions and live spectator reads** so a director laptop, a board tablet and a spectator phone all see the same official score. The repo now includes a daily/manual GitHub Actions **Pilot Readiness Checks** workflow with local tests and an *opt-in* read-only Supabase staging smoke test. The staging test is disabled until a real staging project, dedicated test accounts and protected secrets are configured. It does not perform scoring writes, create a database or fix defects autonomously. The recommended organization pitch is a scripted private pilot with clearly fictional records and genuine cross-device sync. See [Pilot and Demo Readiness](docs/PILOT_DEMO_READINESS.md).
 
+## Safe environment configuration
+We have a tracked [`.env.example`](.env.example) with blank browser-safe Supabase URL/publishable-key placeholders, and a [`.gitignore`](.gitignore) protecting local `.env` files from accidental commits. No real credentials belong in the repo or this chat. The current plain static GitHub Pages demo does **not** load `.env`; a future frontend build/configuration step is required. We will create a dedicated UCL Supabase staging project rather than using any unrelated project's database. For setup, GitHub protected staging credentials, and least-privilege key handling, see [Environment & Secrets](docs/ENVIRONMENT_AND_SECRETS.md).
+
 ## Development
 Run `npm test` to validate the engine, scorecards, historical fixtures and player statistics. GitHub Actions runs tests on pull requests and before Pages publication.
 

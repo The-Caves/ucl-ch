@@ -121,3 +121,12 @@ Supabase Pro spending-capped Realtime (500 sockets / 500 messages per second) is
 - [ ] Conduct venue pilot and 5k-viewer load tests as separate later release gates; never claim public capacity based on demo.
 
 **Current gate:** no database is connected and the new staging smoke cannot run until Supabase credentials/fixtures are provisioned. The scheduler does not provision Supabase, access production data, or autonomously repair failures. Details: [Private Pilot & Organization Demo Readiness](PILOT_DEMO_READINESS.md).
+
+## Separate UCL database and secret management (2026-11-18)
+- [x] Confirm existing Supabase connection belongs to a Supabase account with an unrelated project; **do not modify that project**.
+- [x] Add `.gitignore` protection for local `.env` files, a blank `.env.example`, and [safe configuration instructions](ENVIRONMENT_AND_SECRETS.md).
+- [ ] Confirm which Supabase organization will own the new **UCL staging project**, review any creation/billing confirmation, and create that independent project.
+- [ ] Review and apply the UCL auth/RLS migration to the new project only; run live schema and security tests.
+- [ ] Configure protected GitHub `staging` Environment secrets and enable the optional staging smoke checks.
+- [ ] Build compiled frontend public config for URL/publishable key and trusted server-only secret handling; the current static GitHub Pages app cannot load `.env`.
+- [ ] Build the shared event and scoring schema/API, then end-to-end test laptop, tablet and spectator across separate devices.
