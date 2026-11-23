@@ -57,6 +57,9 @@ The next blocker is not merely a database subscription: UCL needs **shared persi
 ## Safe environment configuration
 We have a tracked [`.env.example`](.env.example) with blank browser-safe Supabase URL/publishable-key placeholders, and a [`.gitignore`](.gitignore) protecting local `.env` files from accidental commits. No real credentials belong in the repo or this chat. The current plain static GitHub Pages demo does **not** load `.env`; a future frontend build/configuration step is required. We will create a dedicated UCL Supabase staging project rather than using any unrelated project's database. For setup, GitHub protected staging credentials, and least-privilege key handling, see [Environment & Secrets](docs/ENVIRONMENT_AND_SECRETS.md).
 
+## Director board battery visibility (browser-local prototype)
+The Director **Board Command Center** now has passive battery indicators for board tablets when supported by their browsers, including charging status, low battery under 25%, critical battery under 10%, unsupported devices and stale check-ins. Safari/iPadOS does **not** provide the browser Battery Status API; its status displays **Battery unavailable** instead of inventing a charge. The local demo only shares telemetry across tabs in one browser profile; reporting from real tablets to a different director computer requires authenticated device pairing and a shared backend. There are no battery push alerts. Details: [Board Device Health](docs/BOARD_DEVICE_HEALTH.md).
+
 ## Development
 Run `npm test` to validate the engine, scorecards, historical fixtures and player statistics. GitHub Actions runs tests on pull requests and before Pages publication.
 

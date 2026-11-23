@@ -33,7 +33,7 @@ jobs:
           mkdir -p _site/src _site/public
           cp index.html manifest.webmanifest _site/
           cp public/ucl-mark.svg _site/public/
-          cp src/app.js src/brand.js src/engine.js src/scoring.js src/scorecard.js src/demo.js src/bracket-layout.js src/season-history.js src/player-statistics.js src/tournament-search.js src/leaderboard.js src/leaderboard-view.js src/event-hierarchy.js src/hub-views.js src/board-control.js src/board-views.js src/director-corrections.js src/director-correction-views.js src/scheduling-policy.js src/director-operations.js src/tournament-formats.js src/director-epic-views.js src/styles.css _site/src/
+          cp src/app.js src/brand.js src/engine.js src/scoring.js src/scorecard.js src/demo.js src/bracket-layout.js src/season-history.js src/player-statistics.js src/tournament-search.js src/leaderboard.js src/leaderboard-view.js src/event-hierarchy.js src/hub-views.js src/board-control.js src/board-views.js src/board-battery.js src/director-corrections.js src/director-correction-views.js src/scheduling-policy.js src/director-operations.js src/tournament-formats.js src/director-epic-views.js src/styles.css _site/src/
           touch _site/.nojekyll
           test -s _site/index.html
           test -s _site/src/app.js
@@ -47,6 +47,7 @@ jobs:
           test -s _site/src/hub-views.js
           test -s _site/src/board-control.js
           test -s _site/src/board-views.js
+          test -s _site/src/board-battery.js
           test -s _site/src/director-corrections.js
           test -s _site/src/director-correction-views.js
           test -s _site/src/scheduling-policy.js
