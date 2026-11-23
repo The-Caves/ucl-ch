@@ -13,12 +13,12 @@ test("GitHub Pages copies the optional device monitoring module",()=>{
  const flow=read(".github/workflows/pages.yml");
  assert.match(flow,/src\/board-battery\.js/);
  const index=read("index.html");
- assert.match(index,/20261118a/);
+ assert.match(index,/20261123a/);
 });
 test("device health design explains iPad Safari limitation and backend security",()=>{
  const doc=read("docs/BOARD_DEVICE_HEALTH.md");
  assert.match(doc,/Safari/i);
- assert.match(doc,/Android Chrome/i);
+ assert.match(doc,/(Android Chrome|Chrome on Android)/i);
  assert.match(doc,/server/i);
  assert.match(doc,/battery percentage/i);
  assert.match(doc,/No alerts/i);
