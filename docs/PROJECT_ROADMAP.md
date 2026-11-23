@@ -130,3 +130,12 @@ Supabase Pro spending-capped Realtime (500 sockets / 500 messages per second) is
 - [ ] Configure protected GitHub `staging` Environment secrets and enable the optional staging smoke checks.
 - [ ] Build compiled frontend public config for URL/publishable key and trusted server-only secret handling; the current static GitHub Pages app cannot load `.env`.
 - [ ] Build the shared event and scoring schema/API, then end-to-end test laptop, tablet and spectator across separate devices.
+
+## Director tablet battery health and event tiers (2026-11-23)
+- [x] Browser-local best-effort battery level/charging reporting, passive low (<25%)/critical (<10%) board cards, and unknown/unsupported/stale status; tests cover supported/unsupported browsers.
+- [ ] Implement board pairing and **authenticated** cross-device battery heartbeat in the new UCL Supabase database, visible only to authorized event directors.
+- [ ] Test Android Chrome tablet telemetry, iPad Safari unsupported fallback, reconnects, heartbeats while backgrounded, and real physical device swaps.
+- [ ] Support optional parent-event classification (local, regional, state, open, national) independently of bracket format and player volume.
+- [ ] Provision a **new UCL organization and a single UCL staging project**; leave the unrelated The-Caves project untouched. Add production only before actual live users.
+
+See [Board Device Health](BOARD_DEVICE_HEALTH.md). Browser-only telemetry does **not** cross to separate devices, and its reports are not proof of connectivity.

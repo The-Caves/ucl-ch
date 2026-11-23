@@ -953,3 +953,16 @@ body.bracket-mode .tournamentbracket{margin:0}
  .director-pay-state{padding:8px 2px;font-size:10px}
  .studio-standing>div{flex-direction:column;align-items:flex-start;gap:4px}
 }
+
+
+/* Tablet health: a passive board-floor status, not a push alert. */
+.board-battery{margin-top:12px;padding:10px 12px;border:1px solid #d0dfe9;border-left:4px solid #a4bbce;border-radius:9px;background:#f8fbfd;display:flex;flex-wrap:wrap;align-items:center;gap:5px 8px;color:#405f76;font-size:12px}
+.board-battery strong{font-size:12px;font-weight:900;color:#284f6d}
+.board-battery-detail{width:100%;font-size:10px;line-height:1.4;color:#688397}
+.board-battery-low{border-left-color:#d59d2c;background:#fffaf0}
+.board-battery-low strong{color:#956518}
+.board-battery-critical{border-left-color:#c34d53;background:#fff4f4}
+.board-battery-critical strong{color:#a23940}
+.board-battery-charging{border-left-color:#2b996f;background:#f3fcf7}
+.board-battery-charging strong{color:#167850}
+.board-battery-stale,.board-battery-unavailable,.board-battery-unknown{border-left-color:#a4bbce;background:#f8fbfd}
