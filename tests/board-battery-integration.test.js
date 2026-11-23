@@ -21,6 +21,6 @@ test("device health design explains iPad Safari limitation and backend security"
  assert.match(doc,/(Android Chrome|Chrome on Android)/i);
  assert.match(doc,/server/i);
  assert.match(doc,/battery percentage/i);
- assert.match(doc,/No alerts/i);
+ assert.match(doc,/no (?:push )?alerts/i);
  assert.match(doc,/stale/i);
 });
